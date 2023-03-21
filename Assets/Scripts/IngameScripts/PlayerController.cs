@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     #region Private Fields
     private SpriteRenderer spriteRenderer;
+    private KDH.IngameWork.PlayerEffectManager.PlayerEffectManager effect;
     #endregion
 
     #region Public Fields
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet1;
     public float MaxDelay;
     public float DestroyBullet; //ÃÑÅº ÆÄ±« ½Ã°£
+    public KDH.IngameWork.CameraShake.CameraShake cameraShake;
     #endregion
 
     #region Serialize Fields
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        effect = GetComponent<KDH.IngameWork.PlayerEffectManager.PlayerEffectManager>();
     }
 
 
@@ -55,8 +58,17 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Enemy_Bullet")
         {
-            Destroy(collision.gameObject);
-            Health -= 1;
+            if (!effect.isInvincible)
+            {
+                cameraShake.Shake();
+                effect.Invincible();
+                Destroy(collision.gameObject);
+                Health -= 1;
+                if(Health == 0)
+                {
+                    Dead();
+                }
+            }
         }
     }
 
@@ -135,6 +147,11 @@ public class PlayerController : MonoBehaviour
     void Reload()
     {
         ShootDelay += Time.deltaTime;
+    }
+
+    void Dead()
+    {
+        Destroy(gameObject);
     }
     #endregion
 

@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 1028432619}
   - component: {fileID: 1028432618}
   - component: {fileID: 1028432621}
+  - component: {fileID: 1028432622}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -312,6 +313,20 @@ MonoBehaviour:
   m_CropFrameX: 1
   m_CropFrameY: 1
   m_StretchFill: 1
+--- !u!114 &1028432622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028432617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71c8b8f117774a40a90ba9aab403f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.15
+  duration: 0.5
 --- !u!1 &1216807608
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,11 +431,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1476496755}
   - component: {fileID: 1476496754}
+  - component: {fileID: 1476496758}
   - component: {fileID: 1476496756}
   - component: {fileID: 1476496757}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,13 +454,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 3
-  Speed: 13
+  Speed: 8
   BulletSpeed: 20
   sd: {fileID: 11400000, guid: f0bc8e6d757540548b7d0908cc713661, type: 2}
   Power: 1
   bullet1: {fileID: 7784377818523943607, guid: bd9da2b2385e703408923aaedebba509, type: 3}
   MaxDelay: 0.1
   DestroyBullet: 2
+  cameraShake: {fileID: 1028432622}
   sprites:
   - {fileID: -937433538, guid: e8901c390ed6d1949b1838decf95a97a, type: 3}
   - {fileID: -1362032807, guid: e8901c390ed6d1949b1838decf95a97a, type: 3}
@@ -503,6 +520,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1476496758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476496752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34c6c7db5eae2a44836aa4961d90203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInvincible: 0
+  Invin_Time: 2
 --- !u!1 &1717628058
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854437915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7951946, y: -21.85005, z: 61.54811}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
