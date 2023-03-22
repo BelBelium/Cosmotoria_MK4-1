@@ -4,50 +4,114 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Private Fields
+    private SpriteRenderer spriteRenderer;
+    private KDH.IngameWork.PlayerEffectManager.PlayerEffectManager effect;
+    #endregion
+
+    #region Public Fields
+    public int Health;
     public float Speed = 8.0f;
-    private CharacterController characterController;
-    public Sprite[] sprites = new Sprite[3];
-    public SpriteRenderer spriteRenderer;
+    public float BulletSpeed = 15.0f;
     public Stage_Data sd;
     public int Power;
+    public int Power_Gage;
+    public int Boom;
     public GameObject bullet1;
-
-    public float BulletSpeed = 15.0f;
-
-    [SerializeField] float ShootDelay;
     public float MaxDelay;
-    public float DestroyBullet;
-    // Start is called before the first frame update
+    public float DestroyBullet; //ÃÑÅº ÆÄ±« ½Ã°£
+    public KDH.IngameWork.CameraShake.CameraShake cameraShake;
+    #endregion
+
+    #region Serialize Fields
+    [SerializeField]
+    private Sprite[] sprites = new Sprite[3];
+    [SerializeField]
+    float ShootDelay;
+    #endregion
+
+    #region MonoBehaviour Callbacks
+
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        effect = GetComponent<KDH.IngameWork.PlayerEffectManager.PlayerEffectManager>();
+        GameManager.Instance.isPlayerSurvive = true;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         float xInput = Input.GetAxisRaw("Horizontal");
         float yInput = Input.GetAxisRaw("Vertical");
 
-        float xSpeed = xInput * Speed * Time.deltaTime;
-        float ySpeed = yInput * Speed * Time.deltaTime;
-
-        Vector2 dir = new Vector2(xSpeed, ySpeed);
-
-        characterController.Move(dir);
+        Vector3 dir = new Vector3(xInput, yInput, 0);
+        transform.position += dir * Time.deltaTime * Speed;
 
         MovingAnim(xInput); //ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ÞÀÌ¼Ç
         Fire();
         Reload();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+            foreach (GameObject des in E_obj)
+            {
+                Destroy(des);
+            }
+            foreach (GameObject des in B_obj)
+            {
+                Destroy(des);
+            }
+        }
     }
 
     private void LateUpdate()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, sd.LimitMin.x, sd.LimitMax.x), Mathf.Clamp(transform.position.y, sd.LimitMin.y, sd.LimitMax.y), transform.position.z);
     }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Enemy_Bullet")
+        {
+            if (!effect.isInvincible)
+            {
+                cameraShake.Shake();
+                effect.Invincible();
+                Destroy(collision.gameObject);
+                Health -= 1;
+                if(Power >= 2)
+                {
+                    Power -= 1;
+                    Power_Gage = 0;
+                }
 
+                if(Health == 0)
+                {
+                    GameManager.Instance.isPlayerSurvive = false;
+                    Dead();
+                }
+            }
+        }
+        if(collision.gameObject.tag == "Item_Power")
+        {
+            if (Power < 3)
+            {
+                Power_Gage += 1;
+                if (Power_Gage == Power)
+                {
+                    Power += 1;
+                    Power_Gage = 0;
+                }
+            }
+            Destroy(collision.gameObject);
+        }
+    }
 
+    #endregion
+
+    #region Public Methods
     void MovingAnim(float Xdir)
     {
         if (Xdir >= 0.5)
@@ -121,4 +185,11 @@ public class PlayerController : MonoBehaviour
     {
         ShootDelay += Time.deltaTime;
     }
+
+    void Dead()
+    {
+        Destroy(gameObject);
+    }
+    #endregion
+
 }

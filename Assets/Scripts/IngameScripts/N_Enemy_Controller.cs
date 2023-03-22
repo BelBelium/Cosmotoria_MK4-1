@@ -7,11 +7,12 @@ public class N_Enemy_Controller : MonoBehaviour
     public float Speed = 8.0f;
     public int HP = 3;
     public EnemyHitEffect EnemyHitEffect;
+    public GameObject I_Power;
 
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject,2.0f);
+        Destroy(gameObject,3.0f);
     }
 
     // Update is called once per frame
@@ -31,9 +32,20 @@ public class N_Enemy_Controller : MonoBehaviour
             
             if(HP <= 0)
             {
+                if (ItemDropManager.Drop_Percent(0.12f))
+                {
+                    DropItem();
+                }
                 Destroy(gameObject);
             }
         }
     }
 
+
+    void DropItem()
+    {
+        GameObject ins_Power = Instantiate(I_Power, transform.position, Quaternion.identity);
+        Rigidbody2D rb = ins_Power.GetComponent<Rigidbody2D>();
+        rb.AddForce(Vector3.up * 3.0f, ForceMode2D.Impulse);
+    }
 }

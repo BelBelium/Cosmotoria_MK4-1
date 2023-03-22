@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    GameManager gameManager;
     static public GameManager Instance;
+    public bool isPlayerSurvive;
 
-    void Start()
+    void Awake()
     {
         if(Instance == null)
         {
