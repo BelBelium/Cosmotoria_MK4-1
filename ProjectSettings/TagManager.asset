@@ -43,23 +43,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
+  - name: Ground1
     uniqueID: 3469115173
     locked: 0
-  - name: Desert
+  - name: Ground2
     uniqueID: 2972931393
     locked: 0
   - name: Water
-    uniqueID: 3137018787
-    locked: 0
-  - name: Castle
-    uniqueID: 3412734321
-    locked: 0
-  - name: Castle Object
     uniqueID: 2066385527
     locked: 0
   - name: Object1
-    uniqueID: 2011749885
+    uniqueID: 3137018787
+    locked: 0
+  - name: Object2
+    uniqueID: 3412734321
     locked: 0
   - name: NPC
     uniqueID: 1975888827

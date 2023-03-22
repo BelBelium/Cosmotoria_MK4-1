@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InGameManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class InGameManager : MonoBehaviour
     public Image portraitImage;
     public Image FleryImage;
     public TalkManager talkManager;
-    public Text talkText;
+    public TMP_Text talkText;
     public GameObject scanObject;
     public GameObject talkPanel;
 
@@ -24,56 +25,76 @@ public class InGameManager : MonoBehaviour
 
     public void Scan(GameObject scanObj)
     {
-        //if (isAction)
-        //{
-        //    isAction = false;
-        //}
-        //else
-        //{
-        //    isAction = true;
-        //    scanObject = scanObj;
-        //    ObjectData objectData = scanObject.GetComponent<ObjectData>();
-        //    Talk(objectData.id, objectData.isNpc);
-        //}
-
-        //talkPanel.SetActive(isAction);
-
+        //talkPanel.GetComponent<Animator>().SetBool("isText", true);
         scanObject = scanObj;
         ObjectData objectData = scanObject.GetComponent<ObjectData>();
         Talk(objectData.id, objectData.isNpc);
 
 
         talkPanel.SetActive(isAction);
+        
+
+        //scanObject = scanObj;
+        //ObjectData objectData = scanObject.GetComponent<ObjectData>();
+        //Talk(objectData.id, objectData.isNpc);
+
+
+        //talkPanel.SetActive(isAction);
     }
 
     void Talk(int id, bool isNpc)
     {
-        int questTalkIndex = questManager.GetQuestTalkIndex(id);
-        string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
+        //    int questTalkIndex = questManager.GetQuestTalkIndex(id);
+        //    string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
+
+        //    if (talkData == null)
+        //    {
+        //        talkIndex = 0;
+        //        isAction = false;
+        //        Debug.Log(questManager.CheckQuest(id));
+        //        return;
+        //    }
+
+        //    if (isNpc)
+        //    {
+        //        talkText.text = talkData.Split(':')[0];
+
+        //        portraitImage.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
+        //        portraitImage.color = new Color(1, 1, 1, 1);
+
+        //        FleryImage.color = new Color(1, 1, 1, 1);
+        //    }
+        //    else
+        //    {
+        //        talkText.text = talkData;
+
+        //        portraitImage.color = new Color(1, 1, 1, 0);
+        //        FleryImage.color = new Color(1, 1, 1, 0);
+        //    }
+
+        //    isAction = true;
+        //    talkIndex++;
+        //}
+
+        string talkData = talkManager.GetTalk(id, talkIndex);
 
         if (talkData == null)
-        {
-            talkIndex = 0;
+        {           
             isAction = false;
-            Debug.Log(questManager.CheckQuest(id));
+            talkIndex = 0;
             return;
         }
 
         if (isNpc)
         {
             talkText.text = talkData.Split(':')[0];
-
             portraitImage.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
             portraitImage.color = new Color(1, 1, 1, 1);
-
-            FleryImage.color = new Color(1, 1, 1, 1);
         }
         else
         {
             talkText.text = talkData;
-
             portraitImage.color = new Color(1, 1, 1, 0);
-            FleryImage.color = new Color(1, 1, 1, 0);
         }
 
         isAction = true;
