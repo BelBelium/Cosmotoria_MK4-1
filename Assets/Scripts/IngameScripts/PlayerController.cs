@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float BulletSpeed = 15.0f;
     public Stage_Data sd;
     public int Power;
+    public int Power_Gage;
+    public int Boom;
     public GameObject bullet1;
     public float MaxDelay;
     public float DestroyBullet; //ÃÑÅº ÆÄ±« ½Ã°£
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         effect = GetComponent<KDH.IngameWork.PlayerEffectManager.PlayerEffectManager>();
+        GameManager.Instance.isPlayerSurvive = true;
     }
 
 
@@ -48,6 +51,20 @@ public class PlayerController : MonoBehaviour
         MovingAnim(xInput); //ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ÞÀÌ¼Ç
         Fire();
         Reload();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+            foreach (GameObject des in E_obj)
+            {
+                Destroy(des);
+            }
+            foreach (GameObject des in B_obj)
+            {
+                Destroy(des);
+            }
+        }
     }
 
     private void LateUpdate()
@@ -64,11 +81,31 @@ public class PlayerController : MonoBehaviour
                 effect.Invincible();
                 Destroy(collision.gameObject);
                 Health -= 1;
+                if(Power >= 2)
+                {
+                    Power -= 1;
+                    Power_Gage = 0;
+                }
+
                 if(Health == 0)
                 {
+                    GameManager.Instance.isPlayerSurvive = false;
                     Dead();
                 }
             }
+        }
+        if(collision.gameObject.tag == "Item_Power")
+        {
+            if (Power < 3)
+            {
+                Power_Gage += 1;
+                if (Power_Gage == Power)
+                {
+                    Power += 1;
+                    Power_Gage = 0;
+                }
+            }
+            Destroy(collision.gameObject);
         }
     }
 

@@ -458,9 +458,11 @@ MonoBehaviour:
   BulletSpeed: 20
   sd: {fileID: 11400000, guid: f0bc8e6d757540548b7d0908cc713661, type: 2}
   Power: 1
+  Power_Gage: 0
+  Boom: 0
   bullet1: {fileID: 7784377818523943607, guid: bd9da2b2385e703408923aaedebba509, type: 3}
   MaxDelay: 0.1
-  DestroyBullet: 2
+  DestroyBullet: 1
   cameraShake: {fileID: 1028432622}
   sprites:
   - {fileID: -937433538, guid: e8901c390ed6d1949b1838decf95a97a, type: 3}
@@ -692,3 +694,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2034957687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2034957688}
+  - component: {fileID: 2034957689}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2034957688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034957687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2034957689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034957687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cebe733de5ce8478df6efc0ac838d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerSurvive: 0
