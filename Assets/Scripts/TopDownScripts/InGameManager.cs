@@ -14,90 +14,129 @@ public class InGameManager : MonoBehaviour
     public Image portraitImage;
     public Image FleryImage;
     public TalkManager talkManager;
-    public TMP_Text talkText;
+    public TypeEffect talk;
     public GameObject scanObject;
-    public GameObject talkPanel;
+    public GameObject menuPanel;
+    public GameObject player;
+    public TextMeshProUGUI questText;
+    public Animator portraitAnim;
+    public Animator talkPanel;
+    public Sprite prevPortrait; // 전 초상화를 저장
 
-    private void Start()
+    void Start()
     {
-        // Debug.Log(questManager.CheckQuest());
+        GameLoad();
+        questText.text = questManager.CheckQuest();
+    }
+
+    void Update()
+    {
+        
+        if (Input.GetButtonDown("Cancel"))
+            SubMenuActive();
+    }
+
+    public void SubMenuActive()
+    {
+        if (menuPanel.activeSelf)
+            menuPanel.SetActive(false);
+        else
+            menuPanel.SetActive(true);
     }
 
     public void Scan(GameObject scanObj)
     {
-        //talkPanel.GetComponent<Animator>().SetBool("isText", true);
         scanObject = scanObj;
         ObjectData objectData = scanObject.GetComponent<ObjectData>();
         Talk(objectData.id, objectData.isNpc);
 
 
-        talkPanel.SetActive(isAction);
-        
-
-        //scanObject = scanObj;
-        //ObjectData objectData = scanObject.GetComponent<ObjectData>();
-        //Talk(objectData.id, objectData.isNpc);
-
-
-        //talkPanel.SetActive(isAction);
+        talkPanel.SetBool("isShow", isAction);
     }
 
     void Talk(int id, bool isNpc)
     {
-        //    int questTalkIndex = questManager.GetQuestTalkIndex(id);
-        //    string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
+        // Set Talk Data
+        int questTalkIndex = 0;
+        string talkData = "";
 
-        //    if (talkData == null)
-        //    {
-        //        talkIndex = 0;
-        //        isAction = false;
-        //        Debug.Log(questManager.CheckQuest(id));
-        //        return;
-        //    }
-
-        //    if (isNpc)
-        //    {
-        //        talkText.text = talkData.Split(':')[0];
-
-        //        portraitImage.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
-        //        portraitImage.color = new Color(1, 1, 1, 1);
-
-        //        FleryImage.color = new Color(1, 1, 1, 1);
-        //    }
-        //    else
-        //    {
-        //        talkText.text = talkData;
-
-        //        portraitImage.color = new Color(1, 1, 1, 0);
-        //        FleryImage.color = new Color(1, 1, 1, 0);
-        //    }
-
-        //    isAction = true;
-        //    talkIndex++;
-        //}
-
-        string talkData = talkManager.GetTalk(id, talkIndex);
-
+        if (talk.isAnim)
+        {
+            talk.SetMsg("");
+            return;
+        }
+        else
+        {
+            questTalkIndex = questManager.GetQuestTalkIndex(id);
+            talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
+        }
+        
+        // 대화 끝남
         if (talkData == null)
         {           
             isAction = false;
             talkIndex = 0;
+            questText.text = questManager.CheckQuest(id);
             return;
         }
-
+        // 대화 중
         if (isNpc)
         {
-            talkText.text = talkData.Split(':')[0];
+            talk.SetMsg(talkData.Split(':')[0]);
+            // 초상화 보여주기
             portraitImage.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
             portraitImage.color = new Color(1, 1, 1, 1);
+            // 초상화 애니메이션
+            if (prevPortrait != portraitImage.sprite)
+            {
+                portraitAnim.SetTrigger("doEffect");
+                prevPortrait = portraitImage.sprite;
+            }
+            
         }
         else
         {
-            talkText.text = talkData;
+            talk.SetMsg(talkData);
+            // 초상화 숨기기
             portraitImage.color = new Color(1, 1, 1, 0);
         }
 
         isAction = true;
         talkIndex++;
+    }
+
+    public void GameSave()
+    {
+        PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
+        PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
+        PlayerPrefs.SetInt("QuestId", questManager.questId);
+        PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
+        PlayerPrefs.Save();
+
+        menuPanel.SetActive(false);
+    }
+
+    public void GameLoad()
+    {
+        // 최초 게임 실행했을 땐 데이터가 없으니 예외처리 로직
+        if (!PlayerPrefs.HasKey("PlayerX"))
+        {
+            return;
+        }
+
+        float x = PlayerPrefs.GetFloat("PlayerX");
+        float y = PlayerPrefs.GetFloat("PlayerY");
+        int questId = PlayerPrefs.GetInt("QuestId");
+        int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
+
+        player.transform.position = new Vector3(x, y, 0);
+        questManager.questId = questId;
+        questManager.questActionIndex = questActionIndex;
+        questManager.ControlObject();
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
     }
 }
