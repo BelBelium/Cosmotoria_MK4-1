@@ -24,6 +24,11 @@ public class N_Enemy_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag == "Ultimate_Bullet")
+        {
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.tag == "Bullet")
         {
             HP -= 1;

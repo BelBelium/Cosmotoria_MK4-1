@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     #region Private Fields
     private SpriteRenderer spriteRenderer;
-    private KDH.IngameWork.PlayerEffectManager.PlayerEffectManager effect;
+    private bool isCoolTime;
     #endregion
 
     #region Public Fields
+    public bool isUlti = false; //총격 중지
     public int Health;
     public float Speed = 8.0f;
     public float BulletSpeed = 15.0f;
@@ -20,7 +23,10 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet1;
     public float MaxDelay;
     public float DestroyBullet; //총탄 파괴 시간
-    public KDH.IngameWork.CameraShake.CameraShake cameraShake;
+    public GameObject[] Ultimit_pos;
+    public GameObject Ulti_obj;
+    public GameObject[] target = new GameObject[2];
+    public GameObject Ulti_Time;
     #endregion
 
     #region Serialize Fields
@@ -35,7 +41,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        effect = GetComponent<KDH.IngameWork.PlayerEffectManager.PlayerEffectManager>();
         GameManager.Instance.isPlayerSurvive = true;
     }
 
@@ -51,62 +56,12 @@ public class PlayerController : MonoBehaviour
         MovingAnim(xInput); //플레이어 애니메이션
         Fire();
         Reload();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
-            GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
-            foreach (GameObject des in E_obj)
-            {
-                Destroy(des);
-            }
-            foreach (GameObject des in B_obj)
-            {
-                Destroy(des);
-            }
-        }
+        Ultimit();
     }
 
     private void LateUpdate()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, sd.LimitMin.x, sd.LimitMax.x), Mathf.Clamp(transform.position.y, sd.LimitMin.y, sd.LimitMax.y), transform.position.z);
-    }
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Enemy_Bullet")
-        {
-            if (!effect.isInvincible)
-            {
-                cameraShake.Shake();
-                effect.Invincible();
-                Destroy(collision.gameObject);
-                Health -= 1;
-                if(Power >= 2)
-                {
-                    Power -= 1;
-                    Power_Gage = 0;
-                }
-
-                if(Health == 0)
-                {
-                    GameManager.Instance.isPlayerSurvive = false;
-                    Dead();
-                }
-            }
-        }
-        if(collision.gameObject.tag == "Item_Power")
-        {
-            if (Power < 3)
-            {
-                Power_Gage += 1;
-                if (Power_Gage == Power)
-                {
-                    Power += 1;
-                    Power_Gage = 0;
-                }
-            }
-            Destroy(collision.gameObject);
-        }
     }
 
     #endregion
@@ -186,10 +141,115 @@ public class PlayerController : MonoBehaviour
         ShootDelay += Time.deltaTime;
     }
 
-    void Dead()
+    void Ultimit()
     {
-        Destroy(gameObject);
+        float moveTime = 0.4f;
+        if (Input.GetKeyDown(KeyCode.Space) && isCoolTime == false)
+        {
+            isUlti = true;
+            isCoolTime = true;
+            GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+            foreach (GameObject des in E_obj)
+            {
+                Destroy(des);
+            }
+            foreach (GameObject des in B_obj)
+            {
+                Destroy(des);
+            }
+            StartCoroutine(Ultimit_Action(moveTime));
+        }
     }
     #endregion
+
+
+    IEnumerator Ultimit_Action(float moveTime)
+    {
+        GameObject[] ulti_obj = new GameObject[5];
+        int i = 0;
+        Vector3 vecVel = Vector3.zero;
+        Vector3[] targetPos = new Vector3[ulti_obj.Length];
+        Vector3[] Current = new Vector3[ulti_obj.Length];
+        foreach (GameObject des in ulti_obj)
+        {
+            ulti_obj[i] = Instantiate(Ulti_obj, Ultimit_pos[i].transform.position, Quaternion.identity);
+            targetPos[i] = new Vector3(ulti_obj[i].transform.position.x, target[0].transform.position.y, ulti_obj[i].transform.position.z);
+            i++;
+        }
+        i = 0;
+        while (true)
+        {
+            bool allDone = true;
+            for (int k = 0; k < ulti_obj.Length; k++)
+            {
+                ulti_obj[k].transform.position = Vector3.SmoothDamp(ulti_obj[k].transform.position, targetPos[k], ref vecVel, moveTime);
+                if (Vector3.Distance(ulti_obj[k].transform.position, targetPos[k]) > 0.1f)
+                {
+                    allDone = false;
+                }
+            }
+            if (allDone)
+            {
+                Debug.Log("이동완료");
+                break;
+            }
+            yield return null;
+        }
+        foreach(GameObject des in ulti_obj)
+        {
+            Current[i] = new Vector3(ulti_obj[i].transform.position.x, ulti_obj[i].transform.position.y, ulti_obj[i].transform.position.z);
+            targetPos[i] = new Vector3(ulti_obj[i].transform.position.x, target[1].transform.position.y, ulti_obj[i].transform.position.z);
+            i++;
+        }
+        i = 0;
+        float move2 = 3.0f;
+        float deltaMove = 0.1f;
+
+        yield return new WaitForSeconds(1.5f);
+        isUlti = false;
+
+        yield return new WaitForSeconds(1.0f);
+        foreach(GameObject des in ulti_obj)
+        {
+            ulti_obj[i].GetComponent<Rigidbody2D>().gravityScale = 1.5f;
+            i++;
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        while (true)
+        {
+            bool allDone = true;
+            for (int k = 0; k < ulti_obj.Length; k++)
+            {
+                if (ulti_obj[k] != null && ulti_obj[k].GetComponent<Rigidbody2D>() != null)
+                {
+                    if (ulti_obj[k].GetComponent<Rigidbody2D>().gravityScale == 1.5f)
+                    {
+                        ulti_obj[k].GetComponent<Rigidbody2D>().gravityScale = 0.0f;
+                        Destroy(ulti_obj[k].gameObject, 0.6f);
+                        Debug.Log("완료");
+                    }
+                    Vector3 newPosition = Vector3.Lerp(Current[k], targetPos[k], deltaMove / move2);
+                    ulti_obj[k].GetComponent<Rigidbody2D>().MovePosition(newPosition);
+                    if (Vector3.Distance(ulti_obj[k].transform.position, targetPos[k]) > 0.1f)
+                    {
+                        allDone = false;
+                    }
+                }
+                if (allDone)
+                {
+                    isCoolTime = false;
+                    break;
+                }
+                deltaMove += Time.deltaTime;
+            }
+            if (ulti_obj == null)
+            {
+                break;
+            }
+            yield return null;
+        }
+    }
 
 }
