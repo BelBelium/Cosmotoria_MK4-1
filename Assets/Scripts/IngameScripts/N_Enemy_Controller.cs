@@ -8,11 +8,15 @@ public class N_Enemy_Controller : MonoBehaviour
     public int HP = 3;
     public EnemyHitEffect EnemyHitEffect;
     public GameObject I_Power;
+    public GameObject Des_Effect;
+
+    private AudioSource E_audio;
 
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject,3.0f);
+        E_audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +30,7 @@ public class N_Enemy_Controller : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ultimate_Bullet")
         {
+            DestroyEffect();
             Destroy(gameObject);
         }
 
@@ -41,6 +46,7 @@ public class N_Enemy_Controller : MonoBehaviour
                 {
                     DropItem();
                 }
+                DestroyEffect();
                 Destroy(gameObject);
             }
         }
@@ -52,5 +58,12 @@ public class N_Enemy_Controller : MonoBehaviour
         GameObject ins_Power = Instantiate(I_Power, transform.position, Quaternion.identity);
         Rigidbody2D rb = ins_Power.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector3.up * 3.0f, ForceMode2D.Impulse);
+    }
+
+    public void DestroyEffect()
+    {
+        GameObject Des_Ins = Instantiate(Des_Effect, transform.position, Quaternion.identity);
+        Des_Ins.GetComponent<AudioSource>().Play();
+        Destroy(Des_Ins, 0.5f);
     }
 }

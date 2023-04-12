@@ -4,11 +4,14 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class PlayerController : MonoBehaviour
 {
     #region Private Fields
     private SpriteRenderer spriteRenderer;
     private bool isCoolTime;
+    private AudioSource Player_audio;
     #endregion
 
     #region Public Fields
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Ulti_obj;
     public GameObject[] target = new GameObject[2];
     public GameObject Ulti_Time;
+    public AudioClip[] Player_AC;
     #endregion
 
     #region Serialize Fields
@@ -42,6 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         GameManager.Instance.isPlayerSurvive = true;
+        Player_audio = gameObject.GetComponent<AudioSource>();
     }
 
 
@@ -85,12 +90,12 @@ public class PlayerController : MonoBehaviour
     }
     void Fire()
     {
-
         if (ShootDelay < MaxDelay)
             return;
 
         if (Input.GetButton("Fire1"))
         {
+            Player_audio.Play();
             if (Power == 1)
             {
                 GameObject Bullet = Instantiate(bullet1, transform.position, transform.rotation);
@@ -146,12 +151,14 @@ public class PlayerController : MonoBehaviour
         float moveTime = 0.4f;
         if (Input.GetKeyDown(KeyCode.Space) && isCoolTime == false)
         {
+            AudioSource.PlayClipAtPoint(Player_AC[1],transform.position);
             isUlti = true;
             isCoolTime = true;
             GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
             GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
             foreach (GameObject des in E_obj)
             {
+                des.GetComponent<N_Enemy_Controller>().DestroyEffect();
                 Destroy(des);
             }
             foreach (GameObject des in B_obj)
