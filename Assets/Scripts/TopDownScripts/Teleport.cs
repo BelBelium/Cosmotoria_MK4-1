@@ -10,13 +10,16 @@ public class Teleport : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             targetPoint = collision.gameObject;
+            StartCoroutine(TeleportRoutine());
+        }
+            
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            StartCoroutine(TeleportRoutine());
+        targetPoint = null;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
