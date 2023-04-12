@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TopDownScene.unity
+    path: Assets/Scenes/Planets/Planteria_TopDown.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/MapSelect.unity
+    guid: 23c07c103aa2a904da65450636b91d38
+  - enabled: 1
+    path: Assets/Scenes/Planets/CookieMonster_TopDown.unity
+    guid: 65f333218072b49458074b967c4a55bb
   m_configObjects: {}
