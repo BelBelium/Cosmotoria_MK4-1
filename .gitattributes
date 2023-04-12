@@ -1,4 +1,9 @@
-Assets/Scenes/TopDownScene.unity filter=lfs diff=lfs merge=lfs -text
-Assets/Scenes/TopDownScene.unity.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Scenes/Planets/CookieMonster_TopDown.unity filter=lfs diff=lfs merge=lfs -text
+Assets/Scenes/Planets/CookieMonster_TopDown.unity.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Scenes/Planets/Planteria_TopDown.unity.meta filter=lfs diff=lfs merge=lfs -text
 Assets/Scenes/InGameScene.unity filter=lfs diff=lfs merge=lfs -text
 Assets/Scenes/InGameScene.unity.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Scenes/Planets/Planteria_TopDown.unity filter=lfs diff=lfs merge=lfs -text
+Assets/Scenes/MapSelect.unity filter=lfs diff=lfs merge=lfs -text
+Assets/Scenes/MapSelect.unity.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Scenes/Planets.meta filter=lfs diff=lfs merge=lfs -text

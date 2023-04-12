@@ -56,6 +56,18 @@ TagManager:
   - name: Water
     uniqueID: 2066385527
     locked: 0
+  - name: Bridge
+    uniqueID: 1454742623
+    locked: 0
+  - name: Castle
+    uniqueID: 2973391239
+    locked: 0
+  - name: Castle1
+    uniqueID: 104758403
+    locked: 0
+  - name: Castle2
+    uniqueID: 1804085499
+    locked: 0
   - name: Object1
     uniqueID: 3137018787
     locked: 0
@@ -67,4 +79,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2748251103
+    locked: 0
+  - name: UI
+    uniqueID: 494806729
     locked: 0
