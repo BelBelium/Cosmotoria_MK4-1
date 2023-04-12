@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Planets/CookieMonster_TopDown.unity
     guid: 65f333218072b49458074b967c4a55bb
+  - enabled: 1
+    path: Assets/Scenes/InGameScene.unity
+    guid: 07c6b35dc2d3df4438f4561ad6646804
   m_configObjects: {}
