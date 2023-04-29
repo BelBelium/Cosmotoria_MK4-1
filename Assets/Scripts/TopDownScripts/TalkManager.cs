@@ -25,7 +25,7 @@ public class TalkManager : MonoBehaviour
         // Talk Data
         // 플렌테리아
         // 플렌시아: 1000, 사보텐: 2000,
-        talkData.Add(100, new string[] { "알아볼 수 없는 글씨로 쓰여져있다.   이게 뭐람..." });
+        talkData.Add(100, new string[] { "알아볼 수 없는 글씨로 쓰여져있다. 이게 뭐람..." });
         talkData.Add(1000, new string[] { "안녕....:0", "쿨쿨...:1" });
         talkData.Add(2000, new string[] { "(자고있다...):0", "쿨쿨...:0" });
 
@@ -46,21 +46,6 @@ public class TalkManager : MonoBehaviour
         talkData.Add(31 + 2000, new string[] { "소인이 물건 하나를 잃어버려서 말일세...:0", "상자 하나만 찾아주시게나:0" });
         talkData.Add(31 + 200, new string[] { "상자를 찾았다!" });
         talkData.Add(32 + 2000, new string[] { "오오 고맙네!:0" });
-
-        //portraitData.Add(1000 + 0, portraitArr[2]);
-
-        //portraitData.Add(2000 + 0, portraitArr[0]);
-        //portraitData.Add(2000 + 1, portraitArr[1]);
-
-        //fleryPortraitData.Add(2000 + 0, fleryPortraitData[0]);
-
-        //portraitData.Add(2000 + 0, portraitArr[2]);
-        //portraitData.Add(2000 + 1, portraitArr[2]);
-        //portraitData.Add(2000 + 2, portraitArr[2]);
-
-        //talkData.Add(1000, new string[] { "안녕하시오:0", "오랜만이구려:0" });
-
-        //talkData.Add(2000, new string[] { "Zzz...:1" });
     }
 
     public string GetTalk(int id, int talkIndex)
