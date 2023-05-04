@@ -23,7 +23,7 @@ public class FadeScreen : MonoBehaviour
         // FadeOut 배경의 알파값이 0에서 1로
         //StartCoroutine(Fade(0, 1));
 
-        OnFade(FadeState.FadeOut);
+        OnFade(FadeState.FadeIn);
     }
 
     //private void Update()
@@ -55,7 +55,6 @@ public class FadeScreen : MonoBehaviour
             case FadeState.FadeLoop:    // Fade 효과를 In -> Out 무한 반복
                 break;
         }
-
     }
 
     private IEnumerator FadeInOut()
