@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Cinemachine.DocumentationSortingAttribute;
 
 public class StartPlayer : MonoBehaviour
 {
     private Transform playerTransform;
     private Vector3 targetPos;
+    public GameObject Attack_Btn;
+    public GameObject Boom_Btn;
+    public GameObject JoyPad;
     IEnumerator Cor;
     void Start()
     {
@@ -33,7 +37,10 @@ public class StartPlayer : MonoBehaviour
             if (Vector3.Distance(playerTransform.position, targetPos) < 0.1f)
             {
                 GameManager.Instance.isPlayerStart = true;
-                Debug.Log("±» " + GameManager.Instance.isPlayerStart);
+                Attack_Btn.SetActive(true);
+                Boom_Btn.SetActive(true);
+                JoyPad.SetActive(true);
+                //Debug.Log("±» " + GameManager.Instance.isPlayerStart);
                 break;
             }
             yield return null;

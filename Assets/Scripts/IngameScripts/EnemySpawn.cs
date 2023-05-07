@@ -25,8 +25,8 @@ namespace KDH.IngameWork.EnemySpawn
                     Vector3 SpawnPosition = new Vector3(Random.Range(stage.LimitMin.x, stage.LimitMax.x),
                                                         stage.LimitMax.y + 1);
                     Prefab = Instantiate(N_Enemy, SpawnPosition, transform.rotation);
-                    yield return new WaitForSeconds(0.6f);
                 }
+                yield return new WaitForSeconds(0.6f);
             }
         }
     }

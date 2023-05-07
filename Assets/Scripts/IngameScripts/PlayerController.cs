@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         float xInput = joystick.Horizontal;
         float yInput = joystick.Vertical;
-        if (GameManager.Instance.isPlayerStart == true)
+        if (GameManager.Instance.isPlayerStart)
         {
 
             Vector3 dir = new Vector3(xInput, yInput, 0);
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.Instance.isPlayerStart == true)
+        if (GameManager.Instance.isPlayerStart)
         {
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, sd.LimitMin.x, sd.LimitMax.x), Mathf.Clamp(transform.position.y, sd.LimitMin.y, sd.LimitMax.y), transform.position.z);
         }
@@ -166,25 +166,28 @@ public class PlayerController : MonoBehaviour
 
     public void Ultimit()
     {
-        float moveTime = 0.4f;
-        if (isCoolTime == false)
+        if (GameManager.Instance.isPlayerStart)
         {
-            AudioSource.PlayClipAtPoint(Player_AC[1], transform.position);
-            isUlti = true;
-            isCoolTime = true;
-            GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
-            GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
-            foreach (GameObject des in E_obj)
+            float moveTime = 0.4f;
+            if (isCoolTime == false)
             {
-                des.GetComponent<N_Enemy_Controller>().DestroyEffect();
-                Destroy(des);
-            }
-            foreach (GameObject des in B_obj)
-            {
-                Destroy(des);
-            }
-            StartCoroutine(Ultimit_Action(moveTime));
+                AudioSource.PlayClipAtPoint(Player_AC[1], transform.position);
+                isUlti = true;
+                isCoolTime = true;
+                GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+                foreach (GameObject des in E_obj)
+                {
+                    des.GetComponent<N_Enemy_Controller>().DestroyEffect();
+                    Destroy(des);
+                }
+                foreach (GameObject des in B_obj)
+                {
+                    Destroy(des);
+                }
+                StartCoroutine(Ultimit_Action(moveTime));
 
+            }
         }
     }
     #endregion
