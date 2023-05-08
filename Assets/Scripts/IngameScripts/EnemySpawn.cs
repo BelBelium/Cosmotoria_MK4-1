@@ -28,6 +28,7 @@ namespace KDH.IngameWork.EnemySpawn
                 }
                 yield return new WaitForSeconds(0.6f);
             }
+
         }
     }
 }

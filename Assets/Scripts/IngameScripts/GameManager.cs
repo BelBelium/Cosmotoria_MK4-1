@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     static public GameManager Instance;
     public bool isPlayerSurvive;
     public bool isPlayerStart = false;
+    public int Stage;
     void Awake()
     {
         if(Instance == null)
