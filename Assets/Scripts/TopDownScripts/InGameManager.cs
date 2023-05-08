@@ -28,13 +28,19 @@ public class InGameManager : MonoBehaviour
     {
         //GameLoad();
         questText.text = questManager.CheckQuest();
+
+        //Invoke("IntroTalk", 2f);
     }
 
     void Update()
-    {
-        
+    {       
         if (Input.GetButtonDown("Cancel"))
             SubMenuActive();
+    }
+
+    void IntroTalk()
+    {
+        Talk(0, true);
     }
 
     public void SubMenuActive()
@@ -50,7 +56,6 @@ public class InGameManager : MonoBehaviour
         scanObject = scanObj;
         ObjectData objectData = scanObject.GetComponent<ObjectData>();
         Talk(objectData.id, objectData.isNpc);
-
 
         talkPanel.SetBool("isShow", isAction);
     }

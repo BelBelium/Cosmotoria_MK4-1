@@ -8,11 +8,6 @@ public class SelectPlanet : MonoBehaviour
     public GameObject[] planetPanels;
     public string planetName;
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         planetName = planet.ToString();

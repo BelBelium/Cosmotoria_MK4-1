@@ -13,6 +13,7 @@ public class Teleport : MonoBehaviour
         {
             targetPoint = collision.gameObject;
             StartCoroutine(TeleportRoutine());
+            Debug.Log("¥Í¿Ω");
         }
             
     }

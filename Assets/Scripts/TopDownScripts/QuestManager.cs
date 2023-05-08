@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
@@ -19,11 +20,13 @@ public class QuestManager : MonoBehaviour
 
     public void GenerateData()
     {
-        questList.Add(10, new QuestData("ø©ø’ √π ¥Î»≠", new int[] { 1000 }));
+        questList.Add(10, new QuestData("ƒ˘Ω∫∆Æ √π Ω√¿€", new int[] { 0 }));
 
-        questList.Add(20, new QuestData("ø©ø’ ∫Œ≈π µË±‚", new int[] { 1000, 1000 }));
+        questList.Add(20, new QuestData("ø©ø’ √π ¥Î»≠", new int[] { 1000, 1000 }));
 
-        questList.Add(30, new QuestData("ªÁ∫∏≈Ÿ ∫Œ≈π µË±‚", new int[] { 2000, 200, 2000 }));
+        questList.Add(30, new QuestData("¿ΩΩƒ √£¿∏∑Ø ∞°±‚", new int[] { 0, 2000 }));
+
+        //questList.Add(40, new QuestData("ªÁ∫∏≈Ÿ∞˙ ¥Î»≠«œ±‚", new int[] { 2000, 200, 2000 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -65,16 +68,16 @@ public class QuestManager : MonoBehaviour
         switch (questId)
         {
             case 10:
+                //if (questActionIndex == 0)
+                    
+                break;
+            case 20:
                 if (questActionIndex == 1)
-                    questObject[0].SetActive(true);
+                    questObject[1].SetActive(true);
                 break;
             case 30:
                 if (questActionIndex == 0)
-                    questObject[0].SetActive(true);
-                else if (questActionIndex == 1)
-                    questObject[0].SetActive(true);
-                else if (questActionIndex == 2)
-                    questObject[0].SetActive(false);
+                    questObject[1].SetActive(false);
                 break;
         }
     }
