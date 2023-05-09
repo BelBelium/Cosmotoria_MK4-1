@@ -58,6 +58,7 @@ public class InGameManager : MonoBehaviour
     void Talk(int id, bool isNpc, string objName)
     {
         // Set Talk Data
+        
         int questTalkIndex = 0;
         string talkData = "";
 

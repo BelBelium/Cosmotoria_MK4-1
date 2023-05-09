@@ -24,9 +24,9 @@ public class QuestManager : MonoBehaviour
 
         questList.Add(20, new QuestData("여왕 첫 대화", new int[] { 1000, 1000 }));
 
-        questList.Add(30, new QuestData("음식 찾으러 가기", new int[] { 0, 2000 }));
+        questList.Add(30, new QuestData("사보텐과 대화하기", new int[] { 0, 2000 }));
 
-        //questList.Add(40, new QuestData("사보텐과 대화하기", new int[] { 2000, 200, 2000 }));
+        questList.Add(40, new QuestData("여행을 떠나기", new int[] { 2000, 200, 2000 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -80,8 +80,11 @@ public class QuestManager : MonoBehaviour
                 {
                     questObject[1].SetActive(false);
                     questObject[2].SetActive(true);
-                }
-                    
+                }                   
+                break;
+            case 40:
+                if (questActionIndex == 0)
+                    questObject[2].SetActive(false);
                 break;
         }
     }

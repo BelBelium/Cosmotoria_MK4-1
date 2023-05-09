@@ -52,10 +52,5 @@ public class PlanteriaIntro : MonoBehaviour
                 }
                 break;
         }
-        //if (collision.CompareTag("Player"))
-        //{
-        //    manager.Scan(gameObject);
-        //    Debug.Log("¥Í¿Ω");
-        //}
     }
 }
