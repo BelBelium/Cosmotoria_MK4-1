@@ -38,11 +38,6 @@ public class InGameManager : MonoBehaviour
             SubMenuActive();
     }
 
-    void IntroTalk()
-    {
-        Talk(0, true);
-    }
-
     public void SubMenuActive()
     {
         if (menuPanel.activeSelf)
@@ -55,12 +50,12 @@ public class InGameManager : MonoBehaviour
     {
         scanObject = scanObj;
         ObjectData objectData = scanObject.GetComponent<ObjectData>();
-        Talk(objectData.id, objectData.isNpc);
+        Talk(objectData.id, objectData.isNpc, objectData.objectName);
 
         talkPanel.SetBool("isShow", isAction);
     }
 
-    void Talk(int id, bool isNpc)
+    void Talk(int id, bool isNpc, string objName)
     {
         // Set Talk Data
         int questTalkIndex = 0;

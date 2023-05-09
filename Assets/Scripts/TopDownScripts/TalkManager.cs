@@ -56,7 +56,10 @@ public class TalkManager : MonoBehaviour
         "일단 나가볼까...:0"});
 
         talkData.Add(30 + 1000, new string[] { "(일어날 기미가 보이지 않는다...):1" });
-        talkData.Add(30 + 0, new string[] { "흐음... 그런데 혼자서 할 수 있을까?:0" });
+        talkData.Add(30 + 0, new string[] { "흐음... 그런데 혼자서 할 수 있을까?:0", "Zzz... 쿨쿨...",
+            "응? 분명 왕국 밖으로 나와서 왕녀님은 안계실텐데...?:0", "왜 코고는 소리가 나는거지?:0"});
+        talkData.Add(30 + 2000, new string[] { "Zzz... 쿨쿨...:1", "이 사람이구나!:0", "한번 도와달라고 부탁 해봐야겠다!:0",
+        "Zzz... 쿨쿨...:1", "저... 저기요!:0", "음!:1"});
 
         //talkData.Add(30 + 1000, new string[] { "(일어날 기미가 보이지 않는다...):1" });
         //talkData.Add(30 + 2000, new string[] { "여왕님이?:0", "그렇구만...:0" });
