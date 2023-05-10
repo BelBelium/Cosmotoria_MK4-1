@@ -18,13 +18,6 @@ public class PlanteriaIntro : MonoBehaviour
 
     public string autoTalk;
 
-    public void Start()
-    {
-        //player.transform.position = Vector3.Lerp(player.transform.position,
-        //    target[0].transform.position, 0.1f);
-        //manager = GetComponent<InGameManager>();
-    }
-
     public Target currentTarget;
 
     public void Update()

@@ -10,6 +10,7 @@ public class PlayerAction : MonoBehaviour
     bool isHorizonMove;
     public float speed;
     public InGameManager manager;
+    public Teleport teleport;
 
     Rigidbody2D rigidBody;
     Animator animator;
@@ -146,7 +147,9 @@ public class PlayerAction : MonoBehaviour
             case "CANCEL":
                 manager.SubMenuActive();
                 break;
-
+            case "TELEPORT":
+                teleport.MoveSpawn();
+                break;
         }
     }
 

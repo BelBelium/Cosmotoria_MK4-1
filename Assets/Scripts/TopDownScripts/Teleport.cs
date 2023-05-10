@@ -5,22 +5,16 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
     public GameObject targetPoint;
-    public GameObject toPoint;
+    public GameObject[] toPoint;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public bool isTown = true;
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             targetPoint = collision.gameObject;
-            StartCoroutine(TeleportRoutine());
-            Debug.Log("¥Í¿Ω");
         }
-            
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        targetPoint = null;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -28,9 +22,22 @@ public class Teleport : MonoBehaviour
         targetPoint = null;
     }
 
-    IEnumerator TeleportRoutine()
+    public void MoveSpawn()
     {
-        yield return null;
-        targetPoint.transform.position = toPoint.transform.position;
-    }
+        if (isTown == true && targetPoint != null)
+        {
+            targetPoint.transform.position = toPoint[1].transform.position;
+            isTown = false;
+            Debug.Log(isTown);
+        }
+
+        else if (isTown == false && targetPoint != null)
+        {
+            targetPoint.transform.position = toPoint[0].transform.position;
+            isTown = true;
+            Debug.Log(isTown);
+        }
+
+    }       
+
 }

@@ -9,6 +9,7 @@ public class QuestManager : MonoBehaviour
     public int questId; // Äù½ºÆ® ¹øÈ£
     public int questActionIndex; // Äù½ºÆ® ¼ø¼­
     public GameObject[] questObject;
+    public GameObject[] introObject;
 
     Dictionary<int, QuestData> questList;
 
@@ -68,19 +69,26 @@ public class QuestManager : MonoBehaviour
         switch (questId)
         {
             case 10:
-                //if (questActionIndex == 0)
-                    
+                if (questActionIndex == 1)
+                    introObject[0].SetActive(false);
                 break;
             case 20:
-                if (questActionIndex == 1)
+                 if (questActionIndex == 1)
+                {
                     questObject[1].SetActive(true);
+                    questObject[2].SetActive(true);
+                    introObject[1].SetActive(true);
+                }                   
                 break;
             case 30:
                 if (questActionIndex == 0)
                 {
                     questObject[1].SetActive(false);
-                    questObject[2].SetActive(true);
-                }                   
+                }
+                else if (questActionIndex == 1)
+                {
+                    questObject[3].SetActive(true);
+                }
                 break;
             case 40:
                 if (questActionIndex == 0)

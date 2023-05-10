@@ -10,6 +10,7 @@ TagManager:
   - Item_Health
   - Item_Power
   - Ultimate_Bullet
+  - Teleport
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Object
-  - 
+  - Teleport
   - 
   - 
   - 
