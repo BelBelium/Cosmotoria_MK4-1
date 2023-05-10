@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool isCoolTime;
     private AudioSource Player_audio;
     private bool Btn_Pointer;
+    private PlayerBullet playerBullet;
     #endregion
 
     #region Public Fields
@@ -22,12 +23,8 @@ public class PlayerController : MonoBehaviour
     public float Speed = 8.0f;
     public float BulletSpeed = 15.0f;
     public Stage_Data sd;
-    public int Power;
-    public int Power_Gage;
     public int Boom;
     public GameObject bullet1;
-    public float MaxDelay;
-    public float DestroyBullet; //ÃÑÅº ÆÄ±« ½Ã°£
     public GameObject[] Ultimit_pos;
     public GameObject Ulti_obj;
     public GameObject[] target = new GameObject[2];
@@ -50,6 +47,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         GameManager.Instance.isPlayerSurvive = true;
         Player_audio = gameObject.GetComponent<AudioSource>();
+        playerBullet = gameObject.GetComponent<PlayerBullet>();
     }
 
 
@@ -66,9 +64,8 @@ public class PlayerController : MonoBehaviour
             MovingAnim(xInput); //ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ÞÀÌ¼Ç
             if (Btn_Pointer)
             {
-                Fire();
+                playerBullet.Fire();
             }
-            Reload();
         }
     }
 
@@ -99,60 +96,6 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.sprite = sprites[0];
         }
 
-    }
-    void Fire()
-    {
-        if (ShootDelay < MaxDelay)
-            return;
-
-        Player_audio.Play();
-        if (Power == 1)
-        {
-            GameObject Bullet = Instantiate(bullet1, transform.position, transform.rotation);
-            Rigidbody2D Brigid = Bullet.GetComponent<Rigidbody2D>();
-            Brigid.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-
-            Destroy(Bullet, DestroyBullet);
-        }
-        else if (Power == 2)
-        {
-            GameObject BulletL = Instantiate(bullet1, transform.position + Vector3.left * 0.5f, transform.rotation);
-            GameObject BulletR = Instantiate(bullet1, transform.position + Vector3.right * 0.5f, transform.rotation);
-            Rigidbody2D BrigidL = BulletL.GetComponent<Rigidbody2D>();
-            Rigidbody2D BrigidR = BulletR.GetComponent<Rigidbody2D>();
-            BrigidL.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-            BrigidR.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-
-            Destroy(BulletL, DestroyBullet);
-            Destroy(BulletR, DestroyBullet);
-        }
-        else if (Power == 3)
-        {
-            GameObject BulletL = Instantiate(bullet1, transform.position + Vector3.left * 0.5f, transform.rotation);
-            GameObject BulletR = Instantiate(bullet1, transform.position + Vector3.right * 0.5f, transform.rotation);
-            GameObject BulletCR = Instantiate(bullet1, transform.position + Vector3.right * 0.5f, Quaternion.Euler(new Vector3(0, 0, -45)));
-            GameObject BulletCL = Instantiate(bullet1, transform.position + Vector3.left * 0.5f, Quaternion.Euler(new Vector3(0, 0, 45)));
-            Rigidbody2D BrigidL = BulletL.GetComponent<Rigidbody2D>();
-            Rigidbody2D BrigidR = BulletR.GetComponent<Rigidbody2D>();
-            Rigidbody2D BrigidCR = BulletCR.GetComponent<Rigidbody2D>();
-            Rigidbody2D BrigidCL = BulletCL.GetComponent<Rigidbody2D>();
-            BrigidL.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-            BrigidR.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-            BrigidCR.AddForce(Vector2.one * BulletSpeed, ForceMode2D.Impulse);
-            BrigidCL.AddForce((Vector2.up + Vector2.left) * BulletSpeed, ForceMode2D.Impulse);
-
-            Destroy(BulletL, DestroyBullet);
-            Destroy(BulletR, DestroyBullet);
-            Destroy(BulletCR, DestroyBullet - 0.5f);
-            Destroy(BulletCL, DestroyBullet - 0.5f);
-
-        }
-        ShootDelay = 0;
-    }
-
-    void Reload()
-    {
-        ShootDelay += Time.deltaTime;
     }
 
     public void PoinerDown()

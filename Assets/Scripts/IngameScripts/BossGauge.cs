@@ -24,15 +24,15 @@ public class BossGauge : MonoBehaviour
         {
             transform.position = Vector3.SmoothDamp(transform.position, targetPos,ref velVec,moveTime);
             Gaugeimage.fillAmount -= Time.deltaTime / 25.0f;
-            if(GameManager.Instance.Stage == 0 && Gaugeimage.fillAmount == 0)
+            if(GameManager.Instance.Stage == 11 && Gaugeimage.fillAmount == 0)
             {
                 //게임 클리어.
             }
-            else if(GameManager.Instance.Stage == 1 && Gaugeimage.fillAmount == 0)
+            else if(GameManager.Instance.Stage == 12 && Gaugeimage.fillAmount == 0)
             {
                 //게임 클리어
             }
-            else if (GameManager.Instance.Stage == 2 && Gaugeimage.fillAmount == 0)
+            else if (GameManager.Instance.Stage == 13 && Gaugeimage.fillAmount == 0)
             {
                 //보스 등장.
             }
