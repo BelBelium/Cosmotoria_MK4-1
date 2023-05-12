@@ -20,6 +20,7 @@ namespace KDH.IngameWork.PlayerEffectManager
         public bool isInvincible;
         public float Invin_Time;
         public KDH.IngameWork.CameraShake.CameraShake cameraShake;
+        public Health_UI health_UI;
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -53,6 +54,7 @@ namespace KDH.IngameWork.PlayerEffectManager
                     Invincible();
                     Destroy(collision.gameObject);
                     playerController.Health -= 1;
+                    health_UI.Hit_Hearts();
                     if (playerBullet.Power >= 2)
                     {
                         playerBullet.Power -= 1;

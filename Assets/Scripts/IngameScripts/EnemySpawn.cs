@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace KDH.IngameWork.EnemySpawn
 {
@@ -8,13 +10,37 @@ namespace KDH.IngameWork.EnemySpawn
     {
         public Stage_Data stage;
         public GameObject N_Enemy;
+        public Image timer;
+
+
+
         private GameObject Prefab;
+        private Coroutine EnemySpawner;
 
         void Start()
         {
-            StartCoroutine("Normal_Enemy_Spawn");
+            if(GameManager.Instance.Stage == 11)
+            {
+                EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
+            }
+            else if(GameManager.Instance.Stage == 22)
+            {
+                EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
+            }
+            else
+            {
+                EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
+            }
         }
 
+        void Update()
+        {
+            if(timer.GetComponent<Image>().fillAmount == 0 && EnemySpawner != null)
+            {
+                StopCoroutine(EnemySpawner);
+                EnemySpawner = null;
+            }
+        }
 
         IEnumerator Normal_Enemy_Spawn()
         {

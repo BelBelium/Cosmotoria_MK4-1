@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Ulti_Time;
     public AudioClip[] Player_AC;
     public VariableJoystick joystick;
+    public Health_UI health;
     #endregion
 
     #region Serialize Fields
@@ -109,11 +111,13 @@ public class PlayerController : MonoBehaviour
 
     public void Ultimit()
     {
-        if (GameManager.Instance.isPlayerStart)
+        if (GameManager.Instance.isPlayerStart && Boom > 0)
         {
+            Boom -= 1;
             float moveTime = 0.4f;
             if (isCoolTime == false)
             {
+                health.Use_Boom();
                 AudioSource.PlayClipAtPoint(Player_AC[1], transform.position);
                 isUlti = true;
                 isCoolTime = true;
