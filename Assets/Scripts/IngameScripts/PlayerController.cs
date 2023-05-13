@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
             for (int k = 0; k < ulti_obj.Length; k++)
             {
                 ulti_obj[k].transform.position = Vector3.SmoothDamp(ulti_obj[k].transform.position, targetPos[k], ref vecVel, moveTime);
-                if (Vector3.Distance(ulti_obj[k].transform.position, targetPos[k]) > 0.1f)
+                if (Vector3.Distance(ulti_obj[k].transform.position, targetPos[k]) > 0.3f)
                 {
                     allDone = false;
                 }

@@ -10,7 +10,7 @@ public class BossPatterns : MonoBehaviour
     public bool ExitPattern;
     public GameObject Bullet;
     public GameObject Boom_Bullet;
-    public float bullet_Speed = 2.0f;
+    public float bullet_Speed = 10.0f;
     public Transform targetPos;
     #endregion
 
@@ -19,8 +19,29 @@ public class BossPatterns : MonoBehaviour
     private int Pattern_Num = -1;
     private int Previous_Num;
     private Coroutine enumerator;
+    private float Delay = 2.0f;
+    private float currentDelay;
+
     #endregion
+
+    void Start()
+    {
+        targetPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
+
     void Update()
+    {
+        if (GameManager.Instance.isAppearBoss)
+        {
+            currentDelay += Time.deltaTime;
+            if (currentDelay >= Delay)
+            {
+                BossPattern();
+            }
+        }
+    }
+
+    void BossPattern()
     {
         if (enumerator != null && ExitPattern) // 현재 enumerator 안에 돌고 있는 코루틴이 있다면 
         {
@@ -33,7 +54,7 @@ public class BossPatterns : MonoBehaviour
         if (enumerator == null)
         { //현재 enumerator 안에 돌고 있는 코루틴이 없으면
             Pattern_Num = Random.Range(0, 6);
-            if(Previous_Num == Pattern_Num)
+            if (Previous_Num == Pattern_Num)
             {
                 Debug.Log("이전 패턴과 똑같음. 재실행");
                 return;
@@ -85,6 +106,7 @@ public class BossPatterns : MonoBehaviour
             float y = Mathf.Sin(angle + (startAngle * Mathf.PI / 180.0f));
             //angle += 0.3f;
             Vector3 dir = new Vector3(x, y, 0);
+            
             dir.Normalize();
             Wave_Rigid.AddForce(dir * bullet_Speed, ForceMode2D.Impulse);
             if (isMoveLeft)

@@ -42,11 +42,11 @@ public class BossGauge : MonoBehaviour
             {
                 transform.position = Vector3.SmoothDamp(transform.position, OriginalPos, ref velVec, moveTime);
             }
-            else if(GameManager.Instance.Stage == 12 && GaugeImage.fillAmount == 0)
+            else if(GameManager.Instance.Stage == 22 && GaugeImage.fillAmount == 0)
             {
                 //게임 클리어
             }
-            else if (GameManager.Instance.Stage == 13 && GaugeImage.fillAmount == 0)
+            else if (GameManager.Instance.Stage == 33 && GaugeImage.fillAmount == 0)
             {
                 transform.position = Vector3.SmoothDamp(transform.position, OriginalPos, ref velVec, moveTime);
             }

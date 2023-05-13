@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool isPlayerSurvive;
     public bool isPlayerStart = false;
     public int Stage;
+    public bool isAppearBoss;
     void Awake()
     {
         if(Instance == null)
