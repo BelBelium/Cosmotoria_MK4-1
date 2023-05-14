@@ -16,7 +16,7 @@ public class BossGauge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetPos = new Vector3(transform.position.x, transform.position.y - 30.0f, transform.position.z);
+        targetPos = new Vector3(transform.position.x, transform.position.y - 90.0f, transform.position.z);
         GaugeImage = Gauge.GetComponent<Image>();
         OriginalPos = transform.position;
 

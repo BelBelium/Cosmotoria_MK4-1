@@ -83,7 +83,7 @@ namespace KDH.IngameWork.EnemySpawn
                                                         stage.LimitMax.y + 1);
                     Prefab = Instantiate(N_Enemy, SpawnPosition, transform.rotation);
                 }
-                yield return new WaitForSeconds(0.6f);
+                yield return new WaitForSeconds(1.0f);
             }
 
         }
