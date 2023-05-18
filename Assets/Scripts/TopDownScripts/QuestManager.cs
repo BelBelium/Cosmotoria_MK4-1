@@ -87,6 +87,7 @@ public class QuestManager : MonoBehaviour
                 }
                 else if (questActionIndex == 1)
                 {
+                    introObject[1].SetActive(false);
                     questObject[3].SetActive(true);
                 }
                 break;

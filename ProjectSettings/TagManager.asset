@@ -48,11 +48,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Outside
+    uniqueID: 203272409
+    locked: 0
   - name: Ground1
     uniqueID: 3469115173
     locked: 0
   - name: Ground2
     uniqueID: 2972931393
+    locked: 0
+  - name: Ground3
+    uniqueID: 1444883579
     locked: 0
   - name: Water
     uniqueID: 2066385527
