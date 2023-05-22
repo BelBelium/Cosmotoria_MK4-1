@@ -34,6 +34,10 @@ public class NextScene : MonoBehaviour
                 SceneManager.LoadScene("");
                 break;
         }
+    }
 
+    public void GameStart()
+    {
+        SceneManager.LoadScene("MapSelect");
     }
 }
