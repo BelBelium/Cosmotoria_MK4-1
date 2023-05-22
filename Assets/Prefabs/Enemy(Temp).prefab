@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 7
-  HP: 5
+  HP: 3
   EnemyHitEffect: {fileID: 1514788311932361313}
   I_Power: {fileID: 8854670392159587608, guid: 41a9674b0e401104aaaa70f2251abfe7, type: 3}
   Des_Effect: {fileID: 8541931657361903263, guid: 14259b6a1e87ae44580028af40593633, type: 3}

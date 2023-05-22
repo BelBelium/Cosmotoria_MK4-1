@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class Fade : MonoBehaviour
 
 {
-    public float animTime = 1.5f;         // Fade 애니메이션 재생 시간 (단위:초).  
+    public float animTime = 1.0f;         // Fade 애니메이션 재생 시간 (단위:초).  
+    public float fadeTime = 2.0f;
     private Image fadeImage;            // UGUI의 Image컴포넌트 참조 변수.  
 
-    private float start = 1f;           // Mathf.Lerp 메소드의 첫번째 값.  
-    private float end = 0f;             // Mathf.Lerp 메소드의 두번째 값.  
+    public float start = 1f;           // Mathf.Lerp 메소드의 첫번째 값.  
+    public float end = 0f;             // Mathf.Lerp 메소드의 두번째 값.  
     private float time = 0f;            // Mathf.Lerp 메소드의 시간 값.  
 
 
@@ -27,11 +28,11 @@ public class Fade : MonoBehaviour
     {
         
         // 투명해지는 = FadeIn 애니메이션 재생.  
-        if (stopIn == false && time <= 2)
+        if (stopIn == false && time <= fadeTime)
         {
             PlayFadeIn();
         }
-        if (stopOut == false && time <= 2)
+        if (stopOut == false && time <= fadeTime)
         {
             PlayFadeOut();
         }
@@ -42,7 +43,7 @@ public class Fade : MonoBehaviour
             time = 0;
             Debug.Log("StopIn");
         }
-        if (time >= 2 && stopOut == false)
+        if (time > 1 && stopOut == false)
         {
             stopIn = false; //하얗게 전환되고 나서 씬 전환 후 다시 풀거라 넣었다. 그냥 게임 끝낼거면 넣을 필요 없음.
             stopOut = true;
@@ -72,12 +73,12 @@ public class Fade : MonoBehaviour
     // 투명->흰색
     public void PlayFadeOut()
     {
-        Debug.Log("실행완료");
+        //Debug.Log("실행완료");
         stopOut = false;
         // 경과 시간 계산.  
         // 2초(animTime)동안 재생될 수 있도록 animTime으로 나누기.  
         time += Time.deltaTime / animTime;
-
+        Debug.Log(time);
         // Image 컴포넌트의 색상 값 읽어오기.  
         Color color = fadeImage.color;
         // 알파 값 계산.  

@@ -13,12 +13,14 @@ namespace KDH.IngameWork.PlayerEffectManager
         private SpriteRenderer SpriteRenderer;
         private float recent_Time;
         private PlayerController playerController;
+        private PlayerBullet playerBullet;
         #endregion
 
         #region Public Fields
         public bool isInvincible;
         public float Invin_Time;
         public KDH.IngameWork.CameraShake.CameraShake cameraShake;
+        public Health_UI health_UI;
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -26,6 +28,7 @@ namespace KDH.IngameWork.PlayerEffectManager
         {
             SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
             playerController = GetComponent<PlayerController>();
+            playerBullet = GetComponent<PlayerBullet>();
         }
 
         private void Update()
@@ -51,10 +54,11 @@ namespace KDH.IngameWork.PlayerEffectManager
                     Invincible();
                     Destroy(collision.gameObject);
                     playerController.Health -= 1;
-                    if (playerController.Power >= 2)
+                    health_UI.Hit_Hearts();
+                    if (playerBullet.Power >= 2)
                     {
-                        playerController.Power -= 1;
-                        playerController.Power_Gage = 0;
+                        playerBullet.Power -= 1;
+                        playerBullet.Power_Gage = 0;
                     }
 
                     if (playerController.Health == 0)
@@ -66,13 +70,13 @@ namespace KDH.IngameWork.PlayerEffectManager
             }
             if (collision.gameObject.tag == "Item_Power")
             {
-                if (playerController.Power < 3)
+                if (playerBullet.Power < 3)
                 {
-                    playerController.Power_Gage += 1;
-                    if (playerController.Power_Gage == playerController.Power)
+                    playerBullet.Power_Gage += 1;
+                    if (playerBullet.Power_Gage == playerBullet.Power)
                     {
-                        playerController.Power += 1;
-                        playerController.Power_Gage = 0;
+                        playerBullet.Power += 1;
+                        playerBullet.Power_Gage = 0;
                     }
                 }
                 Destroy(collision.gameObject);

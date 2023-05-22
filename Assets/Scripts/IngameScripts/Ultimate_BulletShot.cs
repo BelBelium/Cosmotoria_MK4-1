@@ -11,6 +11,7 @@ namespace KDH.IngameWork.Ultimate_BulletShot {
         private float shootDelay;
         private float maxDelay = 0.1f;
         public bool Ultimate_time = false;
+        public Stage_Data sd;
         private PlayerController playerController;
         // Start is called before the first frame update
         void Start()

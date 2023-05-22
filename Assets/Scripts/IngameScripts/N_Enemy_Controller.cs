@@ -37,7 +37,6 @@ public class N_Enemy_Controller : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             HP -= 1;
-            Destroy(collision.gameObject);
             EnemyHitEffect.recent_Delay = 0;
             
             if(HP <= 0)

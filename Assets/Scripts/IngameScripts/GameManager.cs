@@ -9,11 +9,14 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager Instance;
     public bool isPlayerSurvive;
-
+    public bool isPlayerStart = false;
+    public int Stage;
+    public bool isAppearBoss;
     void Awake()
     {
         if(Instance == null)
         {
+            DontDestroyOnLoad(gameObject);
             Instance = this;
         }
     }

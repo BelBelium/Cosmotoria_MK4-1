@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(AudioSource))]
 
@@ -12,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isCoolTime;
     private AudioSource Player_audio;
+    private bool Btn_Pointer;
+    private PlayerBullet playerBullet;
     #endregion
 
     #region Public Fields
@@ -20,17 +24,15 @@ public class PlayerController : MonoBehaviour
     public float Speed = 8.0f;
     public float BulletSpeed = 15.0f;
     public Stage_Data sd;
-    public int Power;
-    public int Power_Gage;
     public int Boom;
     public GameObject bullet1;
-    public float MaxDelay;
-    public float DestroyBullet; //총탄 파괴 시간
     public GameObject[] Ultimit_pos;
     public GameObject Ulti_obj;
     public GameObject[] target = new GameObject[2];
     public GameObject Ulti_Time;
     public AudioClip[] Player_AC;
+    public VariableJoystick joystick;
+    public Health_UI health;
     #endregion
 
     #region Serialize Fields
@@ -47,31 +49,40 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         GameManager.Instance.isPlayerSurvive = true;
         Player_audio = gameObject.GetComponent<AudioSource>();
+        playerBullet = gameObject.GetComponent<PlayerBullet>();
     }
 
 
     void Update()
     {
-        float xInput = Input.GetAxisRaw("Horizontal");
-        float yInput = Input.GetAxisRaw("Vertical");
+        float xInput = joystick.Horizontal;
+        float yInput = joystick.Vertical;
+        if (GameManager.Instance.isPlayerStart)
+        {
 
-        Vector3 dir = new Vector3(xInput, yInput, 0);
-        transform.position += dir * Time.deltaTime * Speed;
+            Vector3 dir = new Vector3(xInput, yInput, 0);
+            transform.position += dir * Time.deltaTime * Speed;
 
-        MovingAnim(xInput); //플레이어 애니메이션
-        Fire();
-        Reload();
-        Ultimit();
+            MovingAnim(xInput); //플레이어 애니메이션
+            if (Btn_Pointer)
+            {
+                playerBullet.Fire();
+            }
+        }
     }
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, sd.LimitMin.x, sd.LimitMax.x), Mathf.Clamp(transform.position.y, sd.LimitMin.y, sd.LimitMax.y), transform.position.z);
+        if (GameManager.Instance.isPlayerStart)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, sd.LimitMin.x, sd.LimitMax.x), Mathf.Clamp(transform.position.y, sd.LimitMin.y, sd.LimitMax.y), transform.position.z);
+        }
     }
 
     #endregion
 
     #region Public Methods
+
     void MovingAnim(float Xdir)
     {
         if (Xdir >= 0.5)
@@ -88,88 +99,45 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    void Fire()
+
+    public void PoinerDown()
     {
-        if (ShootDelay < MaxDelay)
-            return;
-
-        if (Input.GetButton("Fire1"))
-        {
-            Player_audio.Play();
-            if (Power == 1)
-            {
-                GameObject Bullet = Instantiate(bullet1, transform.position, transform.rotation);
-                Rigidbody2D Brigid = Bullet.GetComponent<Rigidbody2D>();
-                Brigid.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-
-                Destroy(Bullet, DestroyBullet);
-            }
-            else if (Power == 2)
-            {
-                GameObject BulletL = Instantiate(bullet1, transform.position + Vector3.left * 0.5f, transform.rotation);
-                GameObject BulletR = Instantiate(bullet1, transform.position + Vector3.right * 0.5f, transform.rotation);
-                Rigidbody2D BrigidL = BulletL.GetComponent<Rigidbody2D>();
-                Rigidbody2D BrigidR = BulletR.GetComponent<Rigidbody2D>();
-                BrigidL.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-                BrigidR.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-
-                Destroy(BulletL, DestroyBullet);
-                Destroy(BulletR, DestroyBullet);
-            }
-            else if (Power == 3)
-            {
-                GameObject BulletL = Instantiate(bullet1, transform.position + Vector3.left * 0.5f, transform.rotation);
-                GameObject BulletR = Instantiate(bullet1, transform.position + Vector3.right * 0.5f, transform.rotation);
-                GameObject BulletCR = Instantiate(bullet1, transform.position + Vector3.right * 0.5f, Quaternion.Euler(new Vector3(0, 0, -45)));
-                GameObject BulletCL = Instantiate(bullet1, transform.position + Vector3.left * 0.5f, Quaternion.Euler(new Vector3(0, 0, 45)));
-                Rigidbody2D BrigidL = BulletL.GetComponent<Rigidbody2D>();
-                Rigidbody2D BrigidR = BulletR.GetComponent<Rigidbody2D>();
-                Rigidbody2D BrigidCR = BulletCR.GetComponent<Rigidbody2D>();
-                Rigidbody2D BrigidCL = BulletCL.GetComponent<Rigidbody2D>();
-                BrigidL.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-                BrigidR.AddForce(Vector2.up * BulletSpeed, ForceMode2D.Impulse);
-                BrigidCR.AddForce(Vector2.one * BulletSpeed, ForceMode2D.Impulse);
-                BrigidCL.AddForce((Vector2.up + Vector2.left) * BulletSpeed, ForceMode2D.Impulse);
-
-                Destroy(BulletL, DestroyBullet);
-                Destroy(BulletR, DestroyBullet);
-                Destroy(BulletCR, DestroyBullet - 0.5f);
-                Destroy(BulletCL, DestroyBullet - 0.5f);
-            }
-
-            ShootDelay = 0;
-        }
+        Btn_Pointer = true;
+    }
+    public void PointerUp()
+    {
+        Btn_Pointer = false;
     }
 
-    void Reload()
+    public void Ultimit()
     {
-        ShootDelay += Time.deltaTime;
-    }
-
-    void Ultimit()
-    {
-        float moveTime = 0.4f;
-        if (Input.GetKeyDown(KeyCode.Space) && isCoolTime == false)
+        if (GameManager.Instance.isPlayerStart && Boom > 0)
         {
-            AudioSource.PlayClipAtPoint(Player_AC[1],transform.position);
-            isUlti = true;
-            isCoolTime = true;
-            GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
-            GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
-            foreach (GameObject des in E_obj)
+            Boom -= 1;
+            float moveTime = 0.4f;
+            if (isCoolTime == false)
             {
-                des.GetComponent<N_Enemy_Controller>().DestroyEffect();
-                Destroy(des);
+                health.Use_Boom();
+                AudioSource.PlayClipAtPoint(Player_AC[1], transform.position);
+                isUlti = true;
+                isCoolTime = true;
+                GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+                foreach (GameObject des in E_obj)
+                {
+                    des.GetComponent<N_Enemy_Controller>().DestroyEffect();
+                    Destroy(des);
+                }
+                foreach (GameObject des in B_obj)
+                {
+                    Destroy(des);
+                }
+                StartCoroutine(Ultimit_Action(moveTime));
+
             }
-            foreach (GameObject des in B_obj)
-            {
-                Destroy(des);
-            }
-            StartCoroutine(Ultimit_Action(moveTime));
         }
     }
     #endregion
-
 
     IEnumerator Ultimit_Action(float moveTime)
     {
@@ -191,7 +159,7 @@ public class PlayerController : MonoBehaviour
             for (int k = 0; k < ulti_obj.Length; k++)
             {
                 ulti_obj[k].transform.position = Vector3.SmoothDamp(ulti_obj[k].transform.position, targetPos[k], ref vecVel, moveTime);
-                if (Vector3.Distance(ulti_obj[k].transform.position, targetPos[k]) > 0.1f)
+                if (Vector3.Distance(ulti_obj[k].transform.position, targetPos[k]) > 0.3f)
                 {
                     allDone = false;
                 }
@@ -251,8 +219,9 @@ public class PlayerController : MonoBehaviour
                 }
                 deltaMove += Time.deltaTime;
             }
-            if (ulti_obj == null)
+            if (isCoolTime == false)
             {
+                //Debug.Log("빠져나옴");
                 break;
             }
             yield return null;
