@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletSpeed: 30
+  sd: {fileID: 11400000, guid: f0bc8e6d757540548b7d0908cc713661, type: 2}
 --- !u!50 &1499331730253633802
 Rigidbody2D:
   serializedVersion: 4

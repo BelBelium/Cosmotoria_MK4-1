@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private bool isRot;
     private bool isLeft;
 
+    public Stage_Data sd;
     public void Shoot(bool Rot,bool LorR)
     {
         isRot = Rot;
@@ -35,6 +36,18 @@ public class Bullet : MonoBehaviour
             transform.position = transform.position + ((Vector3.up + Vector3.left) * (BulletSpeed * Time.deltaTime));
         }
 
+
+      
+    }
+
+    void LateUpdate()
+    {
+        if(transform.position.y > sd.LimitMax.y + 0.5f ||
+            transform.position.x < sd.LimitMin.x - 0.5f ||
+            transform.position.x > sd.LimitMax.x + 0.5f)
+        {
+            DestroyBulletObj();
+        }
     }
 
     void DestroyBulletObj()

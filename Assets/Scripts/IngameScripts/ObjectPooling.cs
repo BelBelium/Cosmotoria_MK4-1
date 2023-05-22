@@ -7,7 +7,9 @@ public class ObjectPooling : MonoBehaviour
     public static ObjectPooling instance;
     public int Count = 30;
     public GameObject bulletPrefab;
+
     private Queue<Bullet> bullet_Queue = new Queue<Bullet>();
+
     void Awake()
     {
         instance = this;
