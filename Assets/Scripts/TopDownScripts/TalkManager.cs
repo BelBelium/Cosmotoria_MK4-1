@@ -29,6 +29,8 @@ public class TalkManager : MonoBehaviour
         talkData.Add(100, new string[] { "알아볼 수 없는 글씨로 쓰여져있다. 이게 뭐람..." });
         talkData.Add(200, new string[] { "[선인장 방목]", "아무 이유 없이 좌, 우로 흔드는 중." });
         talkData.Add(300, new string[] { "눈치 채셨을 수도 있지만 성이 대칭이 아닙니다." });
+        talkData.Add(400, new string[] { "이미 누가 상자를 열고 안의 내용물을 가져가고 없다.", "남은 것이 있나 살펴보지만 역시나 없다." });
+        talkData.Add(500, new string[] { "." });
         talkData.Add(1000, new string[] { "안녕....:3", "쿨쿨...:4" });
         talkData.Add(2000, new string[] { "(자고있다...):2", "쿨쿨...:4" });
 
