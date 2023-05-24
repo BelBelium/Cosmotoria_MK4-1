@@ -5,9 +5,16 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
     public GameObject targetPoint;
-    public GameObject[] toPoint;
+    public Transform[] toPoint;
+
+    PlayerAction player;
 
     public bool isTown = true;
+
+    public void Start()
+    {
+        player = GameObject.Find("Flery").GetComponent<PlayerAction>();
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -24,20 +31,40 @@ public class Teleport : MonoBehaviour
 
     public void MoveSpawn()
     {
-        if (isTown == true && targetPoint != null)
+        switch (player.teleportName.name)
         {
-            targetPoint.transform.position = toPoint[1].transform.position;
-            isTown = false;
-            Debug.Log(isTown);
+            case "TownTeleport":
+                targetPoint.transform.position = toPoint[1].position;
+                break;
+            case "CastleTeleport":
+                targetPoint.transform.position = toPoint[0].position;
+                break;
+            case "TeapotpoTeleport":
+                targetPoint.transform.position = toPoint[3].position;
+                break;
+            case "TeapotpoToTown":
+                targetPoint.transform.position = toPoint[2].position;
+                break;
         }
 
-        else if (isTown == false && targetPoint != null)
-        {
-            targetPoint.transform.position = toPoint[0].transform.position;
-            isTown = true;
-            Debug.Log(isTown);
-        }
+    }
 
-    }       
+    //public void MoveSpawn()
+    //{
+    //    if (isTown == true && targetPoint != null)
+    //    {
+    //        targetPoint.transform.position = toPoint[1].transform.position;
+    //        isTown = false;
+    //        Debug.Log(isTown);
+    //    }
+
+    //    else if (isTown == false && targetPoint != null)
+    //    {
+    //        targetPoint.transform.position = toPoint[0].transform.position;
+    //        isTown = true;
+    //        Debug.Log(isTown);
+    //    }
+
+    //}       
 
 }

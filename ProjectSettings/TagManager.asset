@@ -11,6 +11,8 @@ TagManager:
   - Item_Power
   - Ultimate_Bullet
   - Teleport
+  - Boss
+  - Portal
   layers:
   - Default
   - TransparentFX

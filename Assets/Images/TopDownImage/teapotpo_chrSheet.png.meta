@@ -1,0 +1,839 @@
+fileFormatVersion: 2
+guid: eb4e58a629ddd5a4889954abc42e67df
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 336
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99e8c7dfaa5b516408c38653b41caaa0
+      internalID: 199275276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 336
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 345a7d66eac165b41bd56b79057a4d6d
+      internalID: 1885680612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 336
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a0f51d47c19cb546ac5c9ebdfc043db
+      internalID: 494547808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_3
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 336
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ac8500e0cecb54bb8724fabea5d5c2
+      internalID: -2129296598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_4
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 288
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278b88936d762f24da500fd096273141
+      internalID: -1295644636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_5
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 288
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 134e514316b8a1a40b05798a04fc68d3
+      internalID: 1095753964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_6
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 288
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f886a76bf4bb914c8b65fdfa86b5a88
+      internalID: 559239557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_7
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 288
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56899e6091c291648a3dbd717a3244c2
+      internalID: -1385561705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_8
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 240
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef7d193f408661b4b82ef7ec31e38b3a
+      internalID: -1755003986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_9
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 240
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55624212be994274cb73ba7a3e2d7428
+      internalID: -1427553259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_10
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 240
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb592b606a22d17478bec2cdd5c29af5
+      internalID: -372756730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_11
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 240
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60fcfb9849953ac4381e0a75c211b3ed
+      internalID: 1124510705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_12
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 192
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24148284f65b6d64dbe286311bdd7500
+      internalID: -1606004051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_13
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 192
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f03d1e6502c2d4a9f1a462bcafc901
+      internalID: 123535303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_14
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 192
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89077c1d000934f4c8f0fe68f33364d4
+      internalID: -1179599621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_15
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 192
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 495489ca8ead26e4c9ec48f0e1f90f7a
+      internalID: -580277378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_16
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 144
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02851f2b072b7da4b95b315e9457b80f
+      internalID: -315039674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_17
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 144
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35f8e87f31257764bb92814685c700fb
+      internalID: -1893449477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_18
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 144
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91c2cabde3eafc947a1f990d0c41c226
+      internalID: -139284616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_19
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 144
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a28f2cfdf1260347b688b118a3a6207
+      internalID: 2116631016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_20
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09aafe8ad5aa92242a5e5291f0da427b
+      internalID: -96180096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_21
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e149706a8a778ed4a972ef8ece0ac8c1
+      internalID: 1501724592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_22
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 96
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9e0495683cd8d548970b6906fef64d3
+      internalID: 169661223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 17
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74a8fc14e1ac67843b5cdf8e52347b12
+      internalID: -482508817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_24
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 48
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d171433a865a3849a26983c9a1f23a4
+      internalID: -1308702372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_25
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 48
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f71b9d5638e367439f770f327fe51cf
+      internalID: 2131727731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_26
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 48
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c3bb54b9d2fcde4c88f76e215825e94
+      internalID: 1108467792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_27
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 48
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15388db4d730c1745924ba057bcb78ac
+      internalID: 1240187718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_28
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 0
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 776fc46db9efe3e40aa1e5a401f4f3d5
+      internalID: 1102016672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_29
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 0
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e9d47d20fb41bb4481511d70e88ffdc
+      internalID: -496575431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_30
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 0
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cf53d2854bd28940b19938224f4a3d3
+      internalID: -1401442506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teapotpo_chrSheet_31
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 0
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c2e9bb592f92a4bbe9f363e1a6ebdd
+      internalID: -575909285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      teapotpo_chrSheet_29: -496575431
+      teapotpo_chrSheet_15: -580277378
+      teapotpo_chrSheet_27: 1240187718
+      teapotpo_chrSheet_30: -1401442506
+      teapotpo_chrSheet_0: 199275276
+      teapotpo_chrSheet_9: -1427553259
+      teapotpo_chrSheet_21: 1501724592
+      teapotpo_chrSheet_1: 1885680612
+      teapotpo_chrSheet_26: 1108467792
+      teapotpo_chrSheet_3: -2129296598
+      teapotpo_chrSheet_17: -1893449477
+      teapotpo_chrSheet_2: 494547808
+      teapotpo_chrSheet_14: -1179599621
+      teapotpo_chrSheet_18: -139284616
+      teapotpo_chrSheet_8: -1755003986
+      teapotpo_chrSheet_20: -96180096
+      teapotpo_chrSheet_25: 2131727731
+      teapotpo_chrSheet_6: 559239557
+      teapotpo_chrSheet_10: -372756730
+      teapotpo_chrSheet_16: -315039674
+      teapotpo_chrSheet_13: 123535303
+      teapotpo_chrSheet_11: 1124510705
+      teapotpo_chrSheet_7: -1385561705
+      teapotpo_chrSheet_28: 1102016672
+      teapotpo_chrSheet_24: -1308702372
+      teapotpo_chrSheet_23: -482508817
+      teapotpo_chrSheet_31: -575909285
+      teapotpo_chrSheet_5: 1095753964
+      teapotpo_chrSheet_22: 169661223
+      teapotpo_chrSheet_12: -1606004051
+      teapotpo_chrSheet_19: 2116631016
+      teapotpo_chrSheet_4: -1295644636
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

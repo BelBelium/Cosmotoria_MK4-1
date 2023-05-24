@@ -11,6 +11,7 @@ public class TalkManager : MonoBehaviour
     public Sprite[] fleryPortraitArr;
     public Sprite[] sabotenPortraitArr;
     public Sprite[] queenPortraitArr;
+    public Sprite[] teapotpoPortraitArr;
     public Sprite nullPortrait;
 
     private void Awake()
@@ -33,6 +34,8 @@ public class TalkManager : MonoBehaviour
         talkData.Add(500, new string[] { "." });
         talkData.Add(1000, new string[] { "안녕....:3", "쿨쿨...:4" });
         talkData.Add(2000, new string[] { "(자고있다...):2", "쿨쿨...:4" });
+        talkData.Add(3000, new string[] { "어라? 아직도 안가셨나요?:3", "아하하...! 좀만 있다가 가려고:1", "안돼죠!! 왕녀님이 기다리신다구요!:7",
+        "아... 알겠어! 지금 가볼게!!:2", "(생각보다 무서운걸 티폿포...):0"});
 
         // Portrait Data
         // 플렌테리아
@@ -56,9 +59,23 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(2000 + 5, sabotenPortraitArr[2]); // 잠깨기
         portraitData.Add(2000 + 6, nullPortrait);
 
+        portraitData.Add(3000 + 0, fleryPortraitArr[0]);
+        portraitData.Add(3000 + 1, fleryPortraitArr[1]);
+        portraitData.Add(3000 + 2, fleryPortraitArr[2]);
+        portraitData.Add(3000 + 3, teapotpoPortraitArr[0]); // 기본
+        portraitData.Add(3000 + 4, teapotpoPortraitArr[1]); // 웃음
+        portraitData.Add(3000 + 5, teapotpoPortraitArr[2]); // 황당
+        portraitData.Add(3000 + 6, teapotpoPortraitArr[3]); // 어지러움
+        portraitData.Add(3000 + 7, teapotpoPortraitArr[4]); // 화남
+        portraitData.Add(3000 + 8, nullPortrait);
+
         // Quest Talk
         talkData.Add(10 + 0, new string[] { "여왕님이 급한 일이라고 부르셨는데...:0", "또 시덥잖은 잔심부름이시려나?:0",
             "별일 아니었으면 좋겠는데...:0", "어쨌든 일단 길을 따라서 왕녀님한테 가볼까!:0" });
+
+        talkData.Add(20 + 3000, new string[] { "티폿포~:1", "플레리 메이드님~ 무슨 일이시죠?:4", "아하하 그냥 놀러와봤어! ㅎㅎ:1",
+        "아~ ㅎㅎ:4", "어! 근데 왕녀님이 플레리님을 찾고계셨어요!:7", "가봐야하지 않을까요?:3", "아 맞다 내 정신 좀 봐!:0",
+        "그럼 이따가 다시 보자~!:1", "네~~ 다녀오세요!:4" });
 
         talkData.Add(20 + 1000, new string[] { "Zzz...:4", "여왕님...?:0", "Zzz... Zzz...:4", 
         "여~~ 왕~~ 님~!!:0", "... 응.......?:3", "하암... 뭐야... 플레리잖아...?:3", "한참 잘자고 있는데 왜 깨운거야...:3",

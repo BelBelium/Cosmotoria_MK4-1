@@ -12,9 +12,12 @@ public class PlayerAction : MonoBehaviour
     public InGameManager manager;
     public Teleport teleport;
 
+
     Rigidbody2D rigidBody;
     Animator animator;
     GameObject scanObject;
+    StartIngame startIngame;
+    public GameObject teleportName;
 
     Vector3 dirVec;
 
@@ -32,10 +35,14 @@ public class PlayerAction : MonoBehaviour
     bool left_Up;
     bool right_Up;
 
+    // Æ÷Å» ÇÔ¼ö
+    public bool isTouch = false;
+
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        startIngame = GameObject.Find("Portal").GetComponent<StartIngame>();
     }
 
     
@@ -120,6 +127,25 @@ public class PlayerAction : MonoBehaviour
             scanObject = null;
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal"))
+        {
+            isTouch = true;
+        }
+
+        if (collision.CompareTag("Teleport"))
+        {
+            teleportName = collision.gameObject;
+            Debug.Log(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isTouch = false;
+    }
+
     public void ButtonDown(string type)
     {
         switch (type) 
@@ -142,13 +168,17 @@ public class PlayerAction : MonoBehaviour
                 break;
             case "ACTION":
                 if (scanObject != null)
-                    manager.Scan(scanObject);
+                    manager.Scan(scanObject);               
                 break;
             case "CANCEL":
                 manager.SubMenuActive();
                 break;
             case "TELEPORT":
-                teleport.MoveSpawn();
+                if (isTouch == true)
+                    startIngame.onClick();
+                else 
+                    teleport.MoveSpawn();
+                
                 break;
         }
     }
