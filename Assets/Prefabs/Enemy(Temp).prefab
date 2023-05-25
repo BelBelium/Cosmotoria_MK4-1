@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49c6fc1080cc3642890c146ac449037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  E_Bullet: {fileID: 6839234656636298005, guid: 54890aa5693a09a448d4167a7e183e1f, type: 3}
+  E_Bullet: {fileID: 5533776219285520505, guid: f6d06fa44909e08459012fb31605807c, type: 3}
   Bullet_Speed: 8
   Player_Tr: {fileID: 0}
 --- !u!114 &1819419130457245977

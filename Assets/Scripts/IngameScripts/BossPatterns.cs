@@ -10,23 +10,29 @@ public class BossPatterns : MonoBehaviour
     public bool ExitPattern;
     public GameObject Bullet;
     public GameObject Boom_Bullet;
+    public GameObject Minions;
     public float bullet_Speed = 10.0f;
     public Transform targetPos;
+    public Transform[] minions_pos;
     #endregion
 
     #region Private Fields
+    [SerializeField]
     private float Boss_HP = 1000.0f;
     private int Pattern_Num = -1;
     private int Previous_Num;
     private Coroutine enumerator;
+    private Coroutine bossMode2_Cor;
     private float Delay = 2.0f;
     private float currentDelay;
-
+    private bool bossMode2 = false;
+    private float HP_origin;
     #endregion
 
     void Start()
     {
         targetPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        HP_origin = Boss_HP;
     }
 
     void Update()
@@ -39,7 +45,15 @@ public class BossPatterns : MonoBehaviour
                 BossPattern();
             }
         }
+
+        if(Boss_HP <= (HP_origin / 2.0f) && !bossMode2)
+        {
+            bossMode2 = true;
+            bossMode2_Cor = StartCoroutine(SummonMinion());
+        }
     }
+
+
 
     void BossPattern()
     {
@@ -51,7 +65,7 @@ public class BossPatterns : MonoBehaviour
         }
 
 
-        if (enumerator == null)
+        if (enumerator == null && Boss_HP >= 0.3f)
         { //현재 enumerator 안에 돌고 있는 코루틴이 없으면
             Pattern_Num = Random.Range(0, 6);
             if (Previous_Num == Pattern_Num)
@@ -90,6 +104,53 @@ public class BossPatterns : MonoBehaviour
         }
     }
 
+
+    IEnumerator SummonMinion()
+    {
+        Vector3[] velVec = new Vector3[4] {Vector3.zero, Vector3.zero , Vector3.zero , Vector3.zero };
+        int moveComplete = 0;
+        Vector3 pos1 = new Vector3(minions_pos[0].transform.position.x, minions_pos[0].transform.position.y, minions_pos[0].transform.position.z);
+        Vector3 pos2 = new Vector3(minions_pos[1].transform.position.x, minions_pos[1].transform.position.y, minions_pos[1].transform.position.z);
+        Vector3 pos3 = new Vector3(minions_pos[2].transform.position.x, minions_pos[2].transform.position.y, minions_pos[2].transform.position.z);
+        Vector3 pos4 = new Vector3(minions_pos[3].transform.position.x, minions_pos[3].transform.position.y, minions_pos[3].transform.position.z);
+        GameObject mini1 = Instantiate(Minions, transform.position, Quaternion.identity);
+        GameObject mini2 = Instantiate(Minions, transform.position, Quaternion.identity);
+        GameObject mini3 = Instantiate(Minions, transform.position, Quaternion.identity);
+        GameObject mini4 = Instantiate(Minions, transform.position, Quaternion.identity);
+        while (true) {
+
+            mini1.transform.position = Vector3.SmoothDamp(mini1.transform.position, pos1,ref velVec[0],0.5f);
+            if (Vector3.Distance(mini1.transform.position, minions_pos[0].position) < 0.1f && moveComplete == 0)
+            {
+                Debug.Log("하수인 이동완료");
+                moveComplete++;
+            }
+            mini2.transform.position = Vector3.SmoothDamp(mini2.transform.position, pos2, ref velVec[1], 0.5f);
+            if (Vector3.Distance(mini2.transform.position, minions_pos[1].position) < 0.1f && moveComplete == 1)
+            {
+                moveComplete++;
+            }
+            mini3.transform.position = Vector3.SmoothDamp(mini3.transform.position, pos3, ref velVec[2], 0.5f);
+            if (Vector3.Distance(mini3.transform.position, minions_pos[2].position) < 0.1f && moveComplete == 2 )
+            {
+                moveComplete++;
+            }
+
+            mini4.transform.position = Vector3.SmoothDamp(mini4.transform.position, pos4, ref velVec[3], 0.5f);
+            if (Vector3.Distance(mini4.transform.position, minions_pos[3].position) < 0.1f && moveComplete == 3)
+            {
+                moveComplete++;
+            }
+
+            if(moveComplete >= 4)
+            {
+                break;
+            }
+
+            yield return null;
+        }
+        yield return null;
+    }
     IEnumerator WavePattern()
     {
         float startAngle = 180.0f;
@@ -270,5 +331,20 @@ public class BossPatterns : MonoBehaviour
 
         Debug.Log("좌우레이저 종료");
         ExitPattern = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Bullet")
+        {
+            GetComponentInChildren<EnemyHitEffect>().recent_Delay = 0;
+            Boss_HP -= 1.0f;
+        }
+
+        if(collision.gameObject.tag == "Ultimate_Bullet")
+        {
+            GetComponentInChildren<EnemyHitEffect>().recent_Delay = 0;
+            Boss_HP -= 0.5f;
+        }
     }
 }

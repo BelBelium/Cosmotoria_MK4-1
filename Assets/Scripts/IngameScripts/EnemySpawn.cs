@@ -61,7 +61,7 @@ namespace KDH.IngameWork.EnemySpawn
             if (GameManager.Instance.Stage == 33 && isBossStage)
             {
                 currentDelay += Time.deltaTime;
-                Debug.Log(currentDelay);
+                //Debug.Log(currentDelay);
                 //보스출현.
                 if (currentDelay >= appearDelay)
                 {
@@ -77,7 +77,7 @@ namespace KDH.IngameWork.EnemySpawn
         {
             while (true)
             {
-                if (GameManager.Instance.isPlayerStart)
+                if (GameManager.Instance.isPlayerStart )
                 {
                     Vector3 SpawnPosition = new Vector3(Random.Range(stage.LimitMin.x, stage.LimitMax.x),
                                                         stage.LimitMax.y + 1);
