@@ -14,6 +14,8 @@ public class BossPatterns : MonoBehaviour
     public float bullet_Speed = 10.0f;
     public Transform targetPos;
     public Transform[] minions_pos;
+    public GameObject BossMode2;
+    public GameObject DangerousEffect;
     #endregion
 
     #region Private Fields
@@ -26,12 +28,15 @@ public class BossPatterns : MonoBehaviour
     private float Delay = 2.0f;
     private float currentDelay;
     private bool bossMode2 = false;
+    private bool berserk = false;
     private float HP_origin;
+    private PlayerController playerController;
     #endregion
 
     void Start()
     {
         targetPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         HP_origin = Boss_HP;
     }
 
@@ -46,10 +51,16 @@ public class BossPatterns : MonoBehaviour
             }
         }
 
-        if(Boss_HP <= (HP_origin / 2.0f) && !bossMode2)
+        if(Boss_HP <= (HP_origin * 0.5f) && !bossMode2)
         {
             bossMode2 = true;
             bossMode2_Cor = StartCoroutine(SummonMinion());
+        }
+
+        if(Boss_HP <= (HP_origin * 0.3f) && !berserk)
+        {
+            berserk = true;
+            StartCoroutine(ShockWavePattern());
         }
     }
 
@@ -67,7 +78,7 @@ public class BossPatterns : MonoBehaviour
 
         if (enumerator == null && Boss_HP >= 0.3f)
         { //현재 enumerator 안에 돌고 있는 코루틴이 없으면
-            Pattern_Num = Random.Range(0, 6);
+            Pattern_Num = Random.Range(0, 4);
             if (Previous_Num == Pattern_Num)
             {
                 Debug.Log("이전 패턴과 똑같음. 재실행");
@@ -87,17 +98,7 @@ public class BossPatterns : MonoBehaviour
                 case 3:
                     if (Boss_HP >= 300.0f)
                         return;
-                    enumerator = StartCoroutine(ShockWavePattern());
-                    break;
-                case 4:
-                    if (Boss_HP >= 300.0f)
-                        return;
-                    enumerator = StartCoroutine(SectorFormRaizerPattern());
-                    break;
-                case 5:
-                    if (Boss_HP >= 300.0f)
-                        return;
-                    enumerator = StartCoroutine(LeftRightPattern());
+                    enumerator = StartCoroutine(BodySlamPattern());
                     break;
             }
             Previous_Num = Pattern_Num;
@@ -119,24 +120,24 @@ public class BossPatterns : MonoBehaviour
         GameObject mini4 = Instantiate(Minions, transform.position, Quaternion.identity);
         while (true) {
 
-            mini1.transform.position = Vector3.SmoothDamp(mini1.transform.position, pos1,ref velVec[0],0.5f);
+            mini1.transform.position = Vector3.SmoothDamp(mini1.transform.position, pos1,ref velVec[0],0.7f);
             if (Vector3.Distance(mini1.transform.position, minions_pos[0].position) < 0.1f && moveComplete == 0)
             {
                 Debug.Log("하수인 이동완료");
                 moveComplete++;
             }
-            mini2.transform.position = Vector3.SmoothDamp(mini2.transform.position, pos2, ref velVec[1], 0.5f);
+            mini2.transform.position = Vector3.SmoothDamp(mini2.transform.position, pos2, ref velVec[1], 0.7f);
             if (Vector3.Distance(mini2.transform.position, minions_pos[1].position) < 0.1f && moveComplete == 1)
             {
                 moveComplete++;
             }
-            mini3.transform.position = Vector3.SmoothDamp(mini3.transform.position, pos3, ref velVec[2], 0.5f);
+            mini3.transform.position = Vector3.SmoothDamp(mini3.transform.position, pos3, ref velVec[2], 0.7f);
             if (Vector3.Distance(mini3.transform.position, minions_pos[2].position) < 0.1f && moveComplete == 2 )
             {
                 moveComplete++;
             }
 
-            mini4.transform.position = Vector3.SmoothDamp(mini4.transform.position, pos4, ref velVec[3], 0.5f);
+            mini4.transform.position = Vector3.SmoothDamp(mini4.transform.position, pos4, ref velVec[3], 0.7f);
             if (Vector3.Distance(mini4.transform.position, minions_pos[3].position) < 0.1f && moveComplete == 3)
             {
                 moveComplete++;
@@ -154,6 +155,7 @@ public class BossPatterns : MonoBehaviour
     IEnumerator WavePattern()
     {
         float startAngle = 180.0f;
+        float angleAim = 0.0f;
         float angle = 0.0f;
         int recycle = 0;
         bool isMoveLeft = false;
@@ -163,8 +165,8 @@ public class BossPatterns : MonoBehaviour
         {
             GameObject WaveBullet = Instantiate(Bullet, transform.position, Quaternion.identity);
             Rigidbody2D Wave_Rigid = WaveBullet.GetComponent<Rigidbody2D>();
-            float x = Mathf.Cos(angle + (startAngle * Mathf.PI / 180.0f));
-            float y = Mathf.Sin(angle + (startAngle * Mathf.PI / 180.0f));
+            float x = Mathf.Cos((angle+angleAim) + (startAngle * Mathf.PI / 180.0f));
+            float y = Mathf.Sin((angle+angleAim) + (startAngle * Mathf.PI / 180.0f));
             //angle += 0.3f;
             Vector3 dir = new Vector3(x, y, 0);
             
@@ -181,6 +183,7 @@ public class BossPatterns : MonoBehaviour
 
             if(angle >= 2.5f)
             {
+                angleAim += 0.4f;
                 isMoveLeft = true;
                 recycle += 1;
             }
@@ -191,7 +194,7 @@ public class BossPatterns : MonoBehaviour
                 
             }
 
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.1f);
 
             if (recycle == 5)
             {
@@ -261,6 +264,10 @@ public class BossPatterns : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         while (true)
         {
+            if(playerController.isUlti == true)
+            {
+                break;
+            }
             RandomBoomPos = new Vector3(Random.Range(-2.0f,2.0f), Random.Range(-4.0f,3.0f), 0);
             //Debug.Log(RandomBoomPos);
             GameObject Boom = Instantiate(Boom_Bullet,transform.position,Quaternion.identity);
@@ -294,6 +301,7 @@ public class BossPatterns : MonoBehaviour
 
             yield return new WaitForSeconds(0.4f);
             BoomCount++;
+            Debug.Log(BoomCount);
             if(BoomCount == 4)
             {
                 break;
@@ -307,29 +315,46 @@ public class BossPatterns : MonoBehaviour
     }
     IEnumerator ShockWavePattern()
     {
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("파동 패턴입니다.");
-        yield return new WaitForSeconds(3.0f);
+        float attackRate = 1.5f;
+        int count = 20;
+        float startAngle = 180.0f;
+        float interAngle = 360 / count;
 
-        Debug.Log("파동 종료");
-        ExitPattern = true;
+        yield return new WaitForSeconds(1.0f);
+        while (true)
+        {
+            for(int i = 0; i < count/2; i++)
+            {
+                GameObject clone = Instantiate(BossMode2, transform.position, Quaternion.identity);
+                float angle = startAngle + interAngle * i;
+                float x = Mathf.Cos(angle * Mathf.PI / 180.0f);
+                float y = Mathf.Sin(angle * Mathf.PI / 180.0f);
+                clone.GetComponent<BossMode2_Movement>().MoveTo(new Vector3(x, y));
+            }
+
+            if(startAngle <= 180.0f)
+            {
+                startAngle += 10;
+            }
+            else
+            {
+                startAngle -= 10;
+            }
+
+            yield return new WaitForSeconds(attackRate);
+        }
     }
-    IEnumerator SectorFormRaizerPattern()
+    IEnumerator BodySlamPattern()
     {
+        
+
         yield return new WaitForSeconds(1.0f);
-        Debug.Log("부채꼴레이저 패턴입니다.");
+
+
+        Debug.Log("몸통박치기 패턴입니다.");
         yield return new WaitForSeconds(3.0f);
 
-        Debug.Log("부채꼴레이저 종료");
-        ExitPattern = true;
-    }
-    IEnumerator LeftRightPattern()
-    {
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("좌우레이저 패턴입니다.");
-        yield return new WaitForSeconds(3.0f);
-
-        Debug.Log("좌우레이저 종료");
+        Debug.Log("몸통박치기 종료");
         ExitPattern = true;
     }
 

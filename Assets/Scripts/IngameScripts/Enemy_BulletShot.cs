@@ -55,7 +55,7 @@ namespace KDH.IngameWork.Enemy_BulletShot
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 rb.AddForce(dir * Bullet_Speed, ForceMode2D.Impulse);
 
-                Destroy(bullet, 2.3f);
+                //Destroy(bullet, 4.0f);
                 isShooting = true;
             }
         }

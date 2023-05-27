@@ -37,7 +37,7 @@ namespace KDH.IngameWork.EnemySpawn
             else
             {
                 Boss = Instantiate(BossPrefab, BossPos.transform.position, Quaternion.identity);
-                targetPos = new Vector3(Boss.transform.position.x, Boss.transform.position.y - 8.0f, Boss.transform.position.z);
+                targetPos = new Vector3(Boss.transform.position.x, Boss.transform.position.y - 9.5f, Boss.transform.position.z);
                 //Boss.SetActive(false);
                 EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
                 
