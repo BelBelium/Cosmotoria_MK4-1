@@ -23,6 +23,6 @@ public class StartIngame : MonoBehaviour
     public void onClick()
     {
         Loading.LoadScene("InGameScene");
-        GameManager.Instance.Stage = 33;
+        GameManager.Instance.Stage = 22;
     }
 }
