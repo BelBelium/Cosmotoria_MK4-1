@@ -11,6 +11,9 @@ TagManager:
   - Item_Power
   - Ultimate_Bullet
   - Teleport
+  - Boss
+  - Enemy2
+  - Minion
   layers:
   - Default
   - TransparentFX

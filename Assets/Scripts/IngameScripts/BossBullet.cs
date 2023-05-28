@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BossBullet : MonoBehaviour
 {
+    public float DestroyTime;
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject,2.0f);
+        Destroy(gameObject,DestroyTime);
     }
 
 }
