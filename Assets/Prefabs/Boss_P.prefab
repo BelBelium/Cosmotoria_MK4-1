@@ -94,7 +94,7 @@ MonoBehaviour:
   - {fileID: 3076488821441855667}
   BossMode2: {fileID: 741030517521734825, guid: b17947c6fe202594ca620fee0a4a54ea, type: 3}
   DangerousEffect: {fileID: 0}
-  Boss_HP: 1000
+  Boss_HP: 800
 --- !u!58 &7640453305616016666
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89f8c296ba626b4383b81afcb4c3ebc, type: 3}
   m_Name: EnemySpawn
   m_EditorClassIdentifier: 
-  limitMin: {x: -4, y: 2}
-  limitMax: {x: 4, y: 8}
+  limitMin: {x: -5, y: 4.5}
+  limitMax: {x: 5, y: 11.5}

@@ -122,10 +122,18 @@ public class PlayerController : MonoBehaviour
                 isUlti = true;
                 isCoolTime = true;
                 GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject[] S_obj = GameObject.FindGameObjectsWithTag("Enemy2");
                 GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
                 foreach (GameObject des in E_obj)
                 {
                     des.GetComponent<N_Enemy_Controller>().DestroyEffect();
+                    Destroy(des);
+                }
+                foreach (GameObject des in S_obj)
+                {
+                    var enemyController = des.GetComponent<N2_Enemy_Controller>();
+                    enemyController.DestroyEffect();
+                    enemyController.count.spawnCount -= 1;
                     Destroy(des);
                 }
                 foreach (GameObject des in B_obj)
