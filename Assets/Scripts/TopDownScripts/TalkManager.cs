@@ -49,7 +49,8 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(1000 + 2, fleryPortraitArr[2]);
         portraitData.Add(1000 + 3, queenPortraitArr[0]); // 기본
         portraitData.Add(1000 + 4, queenPortraitArr[1]); // 자기
-        portraitData.Add(1000 + 5, nullPortrait);
+        portraitData.Add(1000 + 5, queenPortraitArr[2]); // 반짝반짝
+        portraitData.Add(1000 + 6, nullPortrait);
 
         portraitData.Add(2000 + 0, fleryPortraitArr[0]);
         portraitData.Add(2000 + 1, fleryPortraitArr[1]);
@@ -83,12 +84,13 @@ public class TalkManager : MonoBehaviour
         "아, 그래 맞다......:3", "뭐 사실 그렇게 급한 일은 아니고:3", "(역시 그럴 줄 알았어...):2", "이걸 한번 봐바...:3"});
 
         talkData.Add(21 + 1000, new string[] { "이게 도대체 뭔가요?:0", "전설로만 등장하는 우주의 음식이라는데...:3", 
-            "한번 먹으면 절대로 그 맛을 잊지 못한다는데...:1", "그렇군요:0", "그걸 네가 좀 가져와줘:3", "(역시나...):0",
+            "한번 먹으면 절대로 그 맛을 잊지 못한다는데...:5", "그렇군요:0", "그걸 네가 좀 가져와줘:3", "(역시나...):0",
         "네, 알겠습니다 왕녀님!:1", "그럼... 잘 부탁해...:3", ".........:3", "Zzz....:4", "(다시 자버렸다.):0",
         "일단 나가볼까...:0"});
        
         talkData.Add(30 + 0, new string[] { "흐음... 그런데 혼자서 할 수 있을까?:0", "Zzz... 쿨쿨...:3",
             "응? 분명 왕국 밖으로 나와서 왕녀님은 안계실텐데...?:0", "왜 코고는 소리가 나는거지?:0"});
+
         talkData.Add(31 + 2000, new string[] { "Zzz... 쿨쿨...:4", "이 사람이구나!:0", "한번 도와달라고 부탁 해봐야겠다!:0",
         "Zzz... 쿨쿨...:4", "저... 저기요!:0", "음!:5", "아, 무슨일이시오?:3", "그... 혹시 이 음식이 어디있는지 알고 있으세요?:0",
         "(사보텐에게 음식 사진을 보여줬다.):6", "흠... 잘 모르겠구려, 난생 처음 보는 음식이옵네만:3", "아 그렇군요!:0",
@@ -96,12 +98,6 @@ public class TalkManager : MonoBehaviour
         "저랑 같이 이 음식을 찾는 것을 도와주실 수 있나요?:0", "좋소, 마침 심심하던 참이니:3", "(엄청 흔쾌한 성격이다?!):1",
         "가... 감사합니다! 그럼 지금부터 같이 찾으러 가봐요!:0", "쿨쿨...:4", "(그새 자고있어??!!):2", "일어나세욧!!:0",
         "어... 엇!:5", "알겠소...:3"});
-
-        //talkData.Add(30 + 1000, new string[] { "(일어날 기미가 보이지 않는다...):1" });
-        //talkData.Add(30 + 2000, new string[] { "여왕님이?:0", "그렇구만...:0" });
-        //talkData.Add(31 + 2000, new string[] { "소인이 물건 하나를 잃어버려서 말일세...:0", "상자 하나만 찾아주시게나:0" });
-        //talkData.Add(31 + 200, new string[] { "상자를 찾았다!" });
-        //talkData.Add(32 + 2000, new string[] { "오오 고맙네!:0" });
     }
 
     public string GetTalk(int id, int talkIndex)
