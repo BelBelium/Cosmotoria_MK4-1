@@ -33,7 +33,7 @@ public class Minion_Controller : MonoBehaviour
             yield return new WaitForSeconds(ShootRate);
             GameObject clone = Instantiate(Bullet, transform.position, Quaternion.identity);
             Vector3 dir = targetPos.transform.position - clone.transform.position;
-            clone.GetComponent<BossMode2_Movement>().MoveTo(dir.normalized);
+            clone.GetComponent<Movement2D>().MoveTo(dir.normalized);
         }
     }
 

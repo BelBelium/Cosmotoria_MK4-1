@@ -35,18 +35,11 @@ public class BossGauge : MonoBehaviour
                     gameStart = true;
                 }
             }
-            GaugeImage.fillAmount -= Time.deltaTime / 25.0f;
+            GaugeImage.fillAmount -= Time.deltaTime / 30.0f;
 
 
-            if(GameManager.Instance.Stage == 11 && GaugeImage.fillAmount == 0)
-            {
-                transform.position = Vector3.SmoothDamp(transform.position, OriginalPos, ref velVec, moveTime);
-            }
-            else if(GameManager.Instance.Stage == 22 && GaugeImage.fillAmount == 0)
-            {
-                //게임 클리어
-            }
-            else if (GameManager.Instance.Stage == 33 && GaugeImage.fillAmount == 0)
+            
+            if(GaugeImage.fillAmount == 0)
             {
                 transform.position = Vector3.SmoothDamp(transform.position, OriginalPos, ref velVec, moveTime);
             }

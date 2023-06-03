@@ -124,7 +124,7 @@ MonoBehaviour:
   Bullet: {fileID: 5613476943797854245, guid: 5bf166172aa78234b816da558abda8b2, type: 3}
   moveData: {fileID: 11400000, guid: 2ecc586e6bba10c4b9f5c3c294a65d11, type: 2}
   HP: 3
-  moveTime: 2
+  moveTime: 0.1
   recentTime: 2
   moveSpeed: 0.7
   EnemyHitEffect: {fileID: 4804403350611108306}

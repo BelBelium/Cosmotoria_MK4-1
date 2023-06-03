@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace KDH.IngameWork.Enemy_BulletShot
@@ -35,6 +34,13 @@ namespace KDH.IngameWork.Enemy_BulletShot
             ShootTime = Random.Range(0.3f, 0.9f);
         }
 
+        void OnDisable()
+        {
+            ShootTime = Random.Range(0.3f, 0.9f);
+            isShooting = false;
+            delay = 0;
+        }
+
         void Update()
         {
             if(Player_Tr == null)
@@ -51,11 +57,8 @@ namespace KDH.IngameWork.Enemy_BulletShot
             {
                 dir = Player_Tr.position - transform.position;
                 dir.Normalize();
-                GameObject bullet = Instantiate(E_Bullet, transform.position, Quaternion.identity);
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                rb.AddForce(dir * Bullet_Speed, ForceMode2D.Impulse);
-
-                //Destroy(bullet, 4.0f);
+                GameObject clone = Instantiate(E_Bullet, transform.position, Quaternion.identity);
+                clone.GetComponent<Movement2D>().MoveTo(dir);
                 isShooting = true;
             }
         }

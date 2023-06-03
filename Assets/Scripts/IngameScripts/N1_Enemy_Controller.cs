@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class N_Enemy_Controller : MonoBehaviour
+public class N1_Enemy_Controller : MonoBehaviour
 {
     public float Speed = 8.0f;
     public int HP = 3;
     public EnemyHitEffect EnemyHitEffect;
     public GameObject I_Power;
     public GameObject Des_Effect;
+    public Stage_Data sd;
 
     private AudioSource E_audio;
 
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject,4.0f);
         E_audio = gameObject.GetComponent<AudioSource>();
     }
 
@@ -23,7 +23,14 @@ public class N_Enemy_Controller : MonoBehaviour
     void Update()
     {
         transform.position += Vector3.down * Speed * Time.deltaTime;
+    }
 
+    private void LateUpdate()
+    {
+        if (transform.position.y < sd.LimitMin.y - 1.0f)
+        {
+            N1_Enemy_ObjectPool.instance.DestroyEnemy_N1(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,7 +38,7 @@ public class N_Enemy_Controller : MonoBehaviour
         if(collision.gameObject.tag == "Ultimate_Bullet")
         {
             DestroyEffect();
-            Destroy(gameObject);
+            N1_Enemy_ObjectPool.instance.DestroyEnemy_N1(gameObject);
         }
 
         if (collision.gameObject.tag == "Bullet")
@@ -41,12 +48,12 @@ public class N_Enemy_Controller : MonoBehaviour
             
             if(HP <= 0)
             {
-                if (ItemDropManager.Drop_Percent(0.12f))
+                if (ItemDropManager.Drop_Percent(0.3f))
                 {
                     DropItem();
                 }
                 DestroyEffect();
-                Destroy(gameObject);
+                N1_Enemy_ObjectPool.instance.DestroyEnemy_N1(gameObject);
             }
         }
     }

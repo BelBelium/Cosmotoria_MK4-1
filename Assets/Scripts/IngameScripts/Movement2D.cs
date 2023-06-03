@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossMode2_Movement : MonoBehaviour
+public class Movement2D : MonoBehaviour
 {
     public float Speed;
 
     [SerializeField]
     Vector3 direction = Vector3.zero;
 
-    // Update is called once per frame
+    void Start()
+    {
+        Destroy(gameObject, 3.0f);
+    }
+
     void Update()
     {
         transform.position += direction * Speed * Time.deltaTime;

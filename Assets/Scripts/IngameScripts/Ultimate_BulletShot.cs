@@ -34,7 +34,7 @@ namespace KDH.IngameWork.Ultimate_BulletShot {
                     GameObject ins = Instantiate(U_Bullet, transform.position, Quaternion.identity);
                     Rigidbody2D rb = ins.GetComponent<Rigidbody2D>();
                     rb.AddForce(Vector2.up * U_Speed, ForceMode2D.Impulse);
-                    Destroy(ins, 0.85f);
+                    Destroy(ins, 0.9f);
                     shootDelay = 0;
                 }
             }

@@ -329,7 +329,7 @@ public class BossPatterns : MonoBehaviour
                 float angle = startAngle + interAngle * i;
                 float x = Mathf.Cos(angle * Mathf.PI / 180.0f);
                 float y = Mathf.Sin(angle * Mathf.PI / 180.0f);
-                clone.GetComponent<BossMode2_Movement>().MoveTo(new Vector3(x, y));
+                clone.GetComponent<Movement2D>().MoveTo(new Vector3(x, y));
             }
 
             if(startAngle <= 180.0f)

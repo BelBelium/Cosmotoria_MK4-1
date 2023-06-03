@@ -10,7 +10,7 @@ public class N2_Enemy_Controller : MonoBehaviour
     public int HP;
     public float moveTime = 3.0f; //이동하기까지 걸릴 시간(초)
     public float recentTime = 3.0f; //첫 이동 이후 타이머역할.
-    public float moveSpeed = 1.5f;
+    public float moveSpeed;
     public EnemyHitEffect EnemyHitEffect;
     public GameObject Des_Effect;
     public GameObject I_Power;
@@ -37,9 +37,12 @@ public class N2_Enemy_Controller : MonoBehaviour
             {
                 recentTime = 0;
                 movePos = new Vector3(Random.Range(moveData.LimitMin.x, moveData.LimitMax.x), Random.Range(moveData.LimitMin.y, moveData.LimitMax.y));
-                GameObject clone2 = Instantiate(Bullet, transform.position, Quaternion.identity);
-                Vector3 dir = targetPos.transform.position - clone2.transform.position;
-                clone2.GetComponent<BossMode2_Movement>().MoveTo(dir.normalized);
+                if (GameManager.Instance.isPlayerSurvive)
+                {
+                    GameObject clone2 = Instantiate(Bullet, transform.position, Quaternion.identity);
+                    Vector3 dir = targetPos.transform.position - clone2.transform.position;
+                    clone2.GetComponent<Movement2D>().MoveTo(dir.normalized);
+                }
             }
         }
 

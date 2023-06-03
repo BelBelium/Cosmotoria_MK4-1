@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectPooling : MonoBehaviour
 {
     public static ObjectPooling instance;
-    public int Count = 30;
+    public int Bullet_Count = 30;
     public GameObject bulletPrefab;
 
     private Queue<Bullet> bullet_Queue = new Queue<Bullet>();
@@ -13,9 +13,11 @@ public class ObjectPooling : MonoBehaviour
     void Awake()
     {
         instance = this;
-        InitializedBullet(Count);
+        InitializedBullet(Bullet_Count);
     }
 
+
+    #region BulletObjectPooling
 
     private Bullet MakeBullet()
     {
@@ -26,7 +28,7 @@ public class ObjectPooling : MonoBehaviour
 
     private void InitializedBullet(int Count)
     {
-        for(int i = 0; i <Count; i++)
+        for(int i = 0; i < Bullet_Count; i++)
         {
             bullet_Queue.Enqueue(MakeBullet());
         }
@@ -59,4 +61,6 @@ public class ObjectPooling : MonoBehaviour
             bullet_Queue.Enqueue(bullet);
         }
     }
+    #endregion
+
 }

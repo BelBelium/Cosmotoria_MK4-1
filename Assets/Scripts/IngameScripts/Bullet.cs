@@ -10,15 +10,18 @@ public class Bullet : MonoBehaviour
     private bool isLeft;
 
     public Stage_Data sd;
+
     public void Shoot(bool Rot,bool LorR)
     {
         isRot = Rot;
         isLeft = LorR;
-        Invoke("DestroyBulletObj", 1.5f);
     }
-    public void Shoot()
+    private void OnDisable()
     {
-        Invoke("DestroyBulletObj", 1.5f);
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        isRot = false;
+        isLeft = false;
     }
 
     void Update()
@@ -57,7 +60,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-      if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss" || collision.gameObject.tag == "Enemy2")
+      if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss" || collision.gameObject.tag == "Enemy2" || collision.gameObject.tag == "Minion")
         {
             DestroyBulletObj();
         }  

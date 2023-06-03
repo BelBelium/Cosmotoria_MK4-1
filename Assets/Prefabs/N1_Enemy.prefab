@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1514788311932361313}
   - component: {fileID: 2136964899739619055}
   m_Layer: 0
-  m_Name: Enemy(Temp)
+  m_Name: N1_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   EnemyHitEffect: {fileID: 1514788311932361313}
   I_Power: {fileID: 8854670392159587608, guid: 41a9674b0e401104aaaa70f2251abfe7, type: 3}
   Des_Effect: {fileID: 8541931657361903263, guid: 14259b6a1e87ae44580028af40593633, type: 3}
+  sd: {fileID: 11400000, guid: f0bc8e6d757540548b7d0908cc713661, type: 2}
 --- !u!58 &6245541962352259130
 CircleCollider2D:
   m_ObjectHideFlags: 0

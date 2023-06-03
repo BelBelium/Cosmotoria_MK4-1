@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace KDH.IngameWork.EnemySpawn
 {
@@ -30,12 +31,13 @@ namespace KDH.IngameWork.EnemySpawn
 
         void Start()
         {
-            if(GameManager.Instance.Stage == 11)
+            if(SceneManager.GetActiveScene().name == "IngameScene")
             {
                 spawnRate = 1.0f;
                 EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
+                S_EnemySpawner = null;
             }
-            else if(GameManager.Instance.Stage == 22)
+            else if(SceneManager.GetActiveScene().name == "IngameScene_2")
             {
                 spawnRate = 2.5f;
                 EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
@@ -48,7 +50,8 @@ namespace KDH.IngameWork.EnemySpawn
                 targetPos = new Vector3(Boss.transform.position.x, Boss.transform.position.y - 9.5f, Boss.transform.position.z);
                 //Boss.SetActive(false);
                 EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
-                
+                S_EnemySpawner = StartCoroutine(Smart_Enemy_Spawn());
+
             }
         }
 
@@ -58,13 +61,13 @@ namespace KDH.IngameWork.EnemySpawn
             {
                 StopCoroutine(EnemySpawner);
                 EnemySpawner = null;
-                if(GameManager.Instance.Stage == 22)
+
+                StopCoroutine(S_EnemySpawner);
+                S_EnemySpawner = null;
+
+                if (SceneManager.GetActiveScene().name == "IngameScene_Boss")
                 {
-                    StopCoroutine(S_EnemySpawner);
-                    S_EnemySpawner = null;
-                }
-                if (GameManager.Instance.Stage == 33)
-                {
+
                     isBossStage = true;
                     BossWarning.stopOut = false;
                 }
@@ -74,7 +77,7 @@ namespace KDH.IngameWork.EnemySpawn
                 }
             }
 
-            if (GameManager.Instance.Stage == 33 && isBossStage)
+            if (SceneManager.GetActiveScene().name == "IngameScene_Boss" && isBossStage)
             {
                 currentDelay += Time.deltaTime;
                 //Debug.Log(currentDelay);
@@ -116,7 +119,7 @@ namespace KDH.IngameWork.EnemySpawn
                     spawnCount++;
                 }
 
-                yield return new WaitForSeconds(3.0f);
+                yield return new WaitForSeconds(spawnRate+0.5f);
             }
         }
     }

@@ -9,10 +9,6 @@ public class PlayerBullet : MonoBehaviour
     private float ShootDelay;
     public float MaxDelay;
 
-    void Start()
-    {
-        
-    }
     void Update()
     {
         Reload();
@@ -27,7 +23,6 @@ public class PlayerBullet : MonoBehaviour
         {
             var Bullet = ObjectPooling.instance.GetBullet();
             Bullet.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.8f, gameObject.transform.position.z);
-            Bullet.Shoot();
 
         }
         else if (Power == 2)
@@ -36,8 +31,6 @@ public class PlayerBullet : MonoBehaviour
             var BulletR = ObjectPooling.instance.GetBullet();
             BulletL.transform.position = new Vector3(gameObject.transform.position.x - 0.35f, gameObject.transform.position.y + 0.8f, gameObject.transform.position.z);
             BulletR.transform.position = new Vector3(gameObject.transform.position.x + 0.35f, gameObject.transform.position.y + 0.8f, gameObject.transform.position.z);
-            BulletL.Shoot();
-            BulletR.Shoot();
 
         }
         else if (Power == 3)
@@ -52,8 +45,6 @@ public class PlayerBullet : MonoBehaviour
             BulletCR.transform.position = new Vector3(gameObject.transform.position.x + 0.4f, gameObject.transform.position.y + 0.6f, gameObject.transform.position.z);
             BulletCL.transform.rotation = Quaternion.Euler(0, 0, 40);
             BulletCR.transform.rotation = Quaternion.Euler(0, 0, -40);
-            BulletL.Shoot();
-            BulletR.Shoot();
             BulletCL.Shoot(true,true);
             BulletCR.Shoot(true,false);
             //Rigidbody2D BrigidL = BulletL.GetComponent<Rigidbody2D>();

@@ -113,10 +113,11 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.isPlayerStart && Boom > 0)
         {
-            Boom -= 1;
+            Debug.Log("실행완료");
             float moveTime = 0.4f;
             if (isCoolTime == false)
             {
+                Boom -= 1;
                 health.Use_Boom();
                 AudioSource.PlayClipAtPoint(Player_AC[1], transform.position);
                 isUlti = true;
@@ -126,8 +127,8 @@ public class PlayerController : MonoBehaviour
                 GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
                 foreach (GameObject des in E_obj)
                 {
-                    des.GetComponent<N_Enemy_Controller>().DestroyEffect();
-                    Destroy(des);
+                    des.GetComponent<N1_Enemy_Controller>().DestroyEffect();
+                    N1_Enemy_ObjectPool.instance.DestroyEnemy_N1(des);
                 }
                 foreach (GameObject des in S_obj)
                 {
@@ -151,7 +152,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject[] ulti_obj = new GameObject[5];
         int i = 0;
-        Vector3 vecVel = Vector3.zero;
+        Vector3[] vecVel = new Vector3[] { Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero };
         Vector3[] targetPos = new Vector3[ulti_obj.Length];
         Vector3[] Current = new Vector3[ulti_obj.Length];
         foreach (GameObject des in ulti_obj)
@@ -166,7 +167,7 @@ public class PlayerController : MonoBehaviour
             bool allDone = true;
             for (int k = 0; k < ulti_obj.Length; k++)
             {
-                ulti_obj[k].transform.position = Vector3.SmoothDamp(ulti_obj[k].transform.position, targetPos[k], ref vecVel, moveTime);
+                ulti_obj[k].transform.position = Vector3.SmoothDamp(ulti_obj[k].transform.position, targetPos[k], ref vecVel[k], moveTime);
                 if (Vector3.Distance(ulti_obj[k].transform.position, targetPos[k]) > 0.3f)
                 {
                     allDone = false;
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour
             }
             if (allDone)
             {
-                Debug.Log("이동완료");
+                //Debug.Log("이동완료");
                 break;
             }
             yield return null;
@@ -211,7 +212,7 @@ public class PlayerController : MonoBehaviour
                     {
                         ulti_obj[k].GetComponent<Rigidbody2D>().gravityScale = 0.0f;
                         Destroy(ulti_obj[k].gameObject, 0.6f);
-                        Debug.Log("완료");
+                        //Debug.Log("완료");
                     }
                     Vector3 newPosition = Vector3.Lerp(Current[k], targetPos[k], deltaMove / move2);
                     ulti_obj[k].GetComponent<Rigidbody2D>().MovePosition(newPosition);

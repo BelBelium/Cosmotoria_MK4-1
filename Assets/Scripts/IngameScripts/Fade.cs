@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Fade : MonoBehaviour
@@ -12,7 +13,7 @@ public class Fade : MonoBehaviour
 
     public float start = 1f;           // Mathf.Lerp 메소드의 첫번째 값.  
     public float end = 0f;             // Mathf.Lerp 메소드의 두번째 값.  
-    private float time = 0f;            // Mathf.Lerp 메소드의 시간 값.  
+    public float time = 0f;            // Mathf.Lerp 메소드의 시간 값.  
 
 
     public bool stopIn = true; //false일때 실행되는건데, 초기값을 false로 한 이유는 게임 시작할때 페이드인으로 들어가려고...그게 싫으면 true로 하면됨.
@@ -43,6 +44,7 @@ public class Fade : MonoBehaviour
             time = 0;
             Debug.Log("StopIn");
         }
+        /*
         if (time > 1 && stopOut == false)
         {
             stopIn = false; //하얗게 전환되고 나서 씬 전환 후 다시 풀거라 넣었다. 그냥 게임 끝낼거면 넣을 필요 없음.
@@ -50,7 +52,7 @@ public class Fade : MonoBehaviour
             time = 0;
             Debug.Log("StopOut");
         }
-   
+   */
 
     }
 
