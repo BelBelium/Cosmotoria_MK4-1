@@ -14,7 +14,7 @@ public class N2_Enemy_Controller : MonoBehaviour
     public EnemyHitEffect EnemyHitEffect;
     public GameObject Des_Effect;
     public GameObject I_Power;
-    public EnemySpawn count;
+    public N2_Enemy_Spawner count;
 
     private Transform targetPos;
     private Vector3 movePos;
@@ -22,9 +22,14 @@ public class N2_Enemy_Controller : MonoBehaviour
 
     void Start()
     {
-        count = GameObject.Find("EnemySpawner").GetComponent<EnemySpawn>();
+        count = GameObject.Find("EnemySpawner").GetComponent<N2_Enemy_Spawner>();
         targetPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         movePos = new Vector3(Random.Range(moveData.LimitMin.x, moveData.LimitMax.x), Random.Range(moveData.LimitMin.y, moveData.LimitMax.y));
+    }
+
+    void OnDisable()
+    {
+        recentTime = 0;
     }
 
     void Update()
@@ -37,7 +42,7 @@ public class N2_Enemy_Controller : MonoBehaviour
             {
                 recentTime = 0;
                 movePos = new Vector3(Random.Range(moveData.LimitMin.x, moveData.LimitMax.x), Random.Range(moveData.LimitMin.y, moveData.LimitMax.y));
-                if (GameManager.Instance.isPlayerSurvive)
+                if (KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerSurvive)
                 {
                     GameObject clone2 = Instantiate(Bullet, transform.position, Quaternion.identity);
                     Vector3 dir = targetPos.transform.position - clone2.transform.position;
@@ -49,12 +54,13 @@ public class N2_Enemy_Controller : MonoBehaviour
         recentTime += Time.deltaTime;
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ultimate_Bullet")
         {
             DestroyEffect();
-            Destroy(gameObject);
+            N2_Enemy_ObjectPool.instance.DestroyEnemy_N2(gameObject);
             count.spawnCount--;
         }
 
@@ -65,13 +71,13 @@ public class N2_Enemy_Controller : MonoBehaviour
 
             if (HP <= 0)
             {
-                if (ItemDropManager.Drop_Percent(0.12f))
+                if (ItemDropManager.Drop_Percent(0.35f))
                 {
                     DropItem();
                 }
                 count.spawnCount--;
                 DestroyEffect();
-                Destroy(gameObject);
+                N2_Enemy_ObjectPool.instance.DestroyEnemy_N2(gameObject);
             }
         }
     }

@@ -85,7 +85,7 @@ MonoBehaviour:
   Bullet: {fileID: 5533776219285520505, guid: f6d06fa44909e08459012fb31605807c, type: 3}
   Boom_Bullet: {fileID: 2385529576269543624, guid: 7c9e6ac8cc7cdab4f80ca36859f91bfc, type: 3}
   Minions: {fileID: 6469834988302144334, guid: ac013df2fbf9e394ab039607545b0bf8, type: 3}
-  bullet_Speed: 15
+  bullet_Speed: 2
   targetPos: {fileID: 0}
   minions_pos:
   - {fileID: 4289600988934054421}

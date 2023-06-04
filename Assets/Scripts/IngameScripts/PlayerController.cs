@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        GameManager.Instance.isPlayerSurvive = true;
+        KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerSurvive = true;
         Player_audio = gameObject.GetComponent<AudioSource>();
         playerBullet = gameObject.GetComponent<PlayerBullet>();
     }
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         float xInput = joystick.Horizontal;
         float yInput = joystick.Vertical;
-        if (GameManager.Instance.isPlayerStart)
+        if (KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart)
         {
 
             Vector3 dir = new Vector3(xInput, yInput, 0);
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.Instance.isPlayerStart)
+        if (KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart)
         {
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, sd.LimitMin.x, sd.LimitMax.x), Mathf.Clamp(transform.position.y, sd.LimitMin.y, sd.LimitMax.y), transform.position.z);
         }
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public void Ultimit()
     {
-        if (GameManager.Instance.isPlayerStart && Boom > 0)
+        if (KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart && Boom > 0)
         {
             Debug.Log("실행완료");
             float moveTime = 0.4f;
@@ -123,19 +123,21 @@ public class PlayerController : MonoBehaviour
                 isUlti = true;
                 isCoolTime = true;
                 GameObject[] E_obj = GameObject.FindGameObjectsWithTag("Enemy");
-                GameObject[] S_obj = GameObject.FindGameObjectsWithTag("Enemy2");
                 GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
                 foreach (GameObject des in E_obj)
                 {
-                    des.GetComponent<N1_Enemy_Controller>().DestroyEffect();
-                    N1_Enemy_ObjectPool.instance.DestroyEnemy_N1(des);
-                }
-                foreach (GameObject des in S_obj)
-                {
-                    var enemyController = des.GetComponent<N2_Enemy_Controller>();
-                    enemyController.DestroyEffect();
-                    enemyController.count.spawnCount -= 1;
-                    Destroy(des);
+                    if(des.GetComponent<N1_Enemy_Controller>() != null)
+                    {
+                        des.GetComponent<N1_Enemy_Controller>().DestroyEffect();
+                        N1_Enemy_ObjectPool.instance.DestroyEnemy_N1(des);
+                    }
+
+                    else if(des.GetComponent<N2_Enemy_Controller>() != null)
+                    {
+                        des.GetComponent<N2_Enemy_Controller>().DestroyEffect();
+                        des.GetComponent<N2_Enemy_Controller>().count.spawnCount -= 1;
+                        N2_Enemy_ObjectPool.instance.DestroyEnemy_N2(des);
+                    }
                 }
                 foreach (GameObject des in B_obj)
                 {

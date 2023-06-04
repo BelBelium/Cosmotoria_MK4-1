@@ -25,7 +25,7 @@ public class BossGauge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.Instance.isPlayerStart == true)
+        if(KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart == true)
         {
             if (!gameStart)
             {

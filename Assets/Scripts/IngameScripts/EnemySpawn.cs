@@ -87,7 +87,7 @@ namespace KDH.IngameWork.EnemySpawn
                     Boss.transform.position = Vector3.SmoothDamp(Boss.transform.position, targetPos, ref velVec, 0.5f);
                     if (Vector3.Distance(Boss.transform.position, targetPos) <= 0.1f)
                     {
-                        GameManager.Instance.isAppearBoss = true;
+                        KDH.IngameWork.IngameManager.IngameManager.Instance.isAppearBoss = true;
                     }
                 }
             }
@@ -96,7 +96,7 @@ namespace KDH.IngameWork.EnemySpawn
         {
             while (true)
             {
-                if (GameManager.Instance.isPlayerStart )
+                if (KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart )
                 {
                     Vector3 SpawnPosition = new Vector3(Random.Range(stage.LimitMin.x, stage.LimitMax.x),
                                                         stage.LimitMax.y + 1);
@@ -111,7 +111,7 @@ namespace KDH.IngameWork.EnemySpawn
         {
             while (true)
             {
-                if(GameManager.Instance.isPlayerStart && spawnCount < 6)
+                if(KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart && spawnCount < 6)
                 {
                     Vector3 SpawnPosition = new Vector3((stage.LimitMin.x + stage.LimitMax.x)/2,stage.LimitMax.y + 1);
 

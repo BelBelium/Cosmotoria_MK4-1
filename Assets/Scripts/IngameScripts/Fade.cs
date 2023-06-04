@@ -15,7 +15,7 @@ public class Fade : MonoBehaviour
     public float end = 0f;             // Mathf.Lerp 메소드의 두번째 값.  
     public float time = 0f;            // Mathf.Lerp 메소드의 시간 값.  
 
-
+    public bool isWarningFade;
     public bool stopIn = true; //false일때 실행되는건데, 초기값을 false로 한 이유는 게임 시작할때 페이드인으로 들어가려고...그게 싫으면 true로 하면됨.
     public bool stopOut = true;
 
@@ -42,17 +42,17 @@ public class Fade : MonoBehaviour
         {
             stopIn = true;
             time = 0;
-            Debug.Log("StopIn");
+            //Debug.Log("StopIn");
         }
-        /*
-        if (time > 1 && stopOut == false)
+        
+        if (time > 1 && stopOut == false && isWarningFade)
         {
             stopIn = false; //하얗게 전환되고 나서 씬 전환 후 다시 풀거라 넣었다. 그냥 게임 끝낼거면 넣을 필요 없음.
             stopOut = true;
             time = 0;
-            Debug.Log("StopOut");
+            //Debug.Log("StopOut");
         }
-   */
+   
 
     }
 
@@ -80,7 +80,7 @@ public class Fade : MonoBehaviour
         // 경과 시간 계산.  
         // 2초(animTime)동안 재생될 수 있도록 animTime으로 나누기.  
         time += Time.deltaTime / animTime;
-        Debug.Log(time);
+        //Debug.Log(time);
         // Image 컴포넌트의 색상 값 읽어오기.  
         Color color = fadeImage.color;
         // 알파 값 계산.  

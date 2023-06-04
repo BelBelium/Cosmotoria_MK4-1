@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class N1_Enemy_Spawner : MonoBehaviour
 {
     public float spawnRate;
-    public GameObject N1_Enemy_Prefab;
     public Stage_Data stage;
     public Image timer;
 
@@ -19,6 +18,10 @@ public class N1_Enemy_Spawner : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "InGameScene")
         {
             spawnRate = 1.0f;
+        }
+        else
+        {
+            spawnRate = 1.5f;
         }
         N1_EnemySpawner = StartCoroutine(Normal_Enemy_Spawn());
     }
@@ -36,7 +39,7 @@ public class N1_Enemy_Spawner : MonoBehaviour
     {
         while (true)
         {
-            if (GameManager.Instance.isPlayerStart)
+            if (KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart)
             {
                 Vector3 SpawnPosition = new Vector3(Random.Range(stage.LimitMin.x, stage.LimitMax.x),
                                                     stage.LimitMax.y + 1);

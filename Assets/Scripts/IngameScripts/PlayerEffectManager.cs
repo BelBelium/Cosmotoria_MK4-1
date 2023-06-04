@@ -63,7 +63,7 @@ namespace KDH.IngameWork.PlayerEffectManager
 
                     if (playerController.Health == 0)
                     {
-                        GameManager.Instance.isPlayerSurvive = false;
+                        KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerSurvive = false;
                         Dead();
                     }
                 }

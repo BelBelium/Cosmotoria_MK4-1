@@ -36,7 +36,7 @@ public class StartPlayer : MonoBehaviour
             playerTransform.position = Vector3.SmoothDamp(playerTransform.transform.position, targetPos, ref vecVel, moveTime);
             if (Vector3.Distance(playerTransform.position, targetPos) < 0.1f)
             {
-                GameManager.Instance.isPlayerStart = true;
+                KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerStart = true;
                 Attack_Btn.SetActive(true);
                 Boom_Btn.SetActive(true);
                 JoyPad.SetActive(true);

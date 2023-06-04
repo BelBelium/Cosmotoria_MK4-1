@@ -27,7 +27,7 @@ namespace KDH.IngameWork.Enemy_BulletShot
 
         void Start()
         {
-            if (GameManager.Instance.isPlayerSurvive == true)
+            if (KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerSurvive == true)
             {
                 Player_Tr = GameObject.FindWithTag("Player").GetComponent<Transform>();
             }

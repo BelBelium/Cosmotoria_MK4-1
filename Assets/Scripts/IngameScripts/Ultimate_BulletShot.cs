@@ -16,7 +16,7 @@ namespace KDH.IngameWork.Ultimate_BulletShot {
         // Start is called before the first frame update
         void Start()
         {
-            if(GameManager.Instance.isPlayerSurvive == true)
+            if(KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerSurvive == true)
             {
                 playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             }

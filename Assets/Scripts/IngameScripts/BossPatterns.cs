@@ -42,7 +42,7 @@ public class BossPatterns : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.isAppearBoss)
+        if (KDH.IngameWork.IngameManager.IngameManager.Instance.isAppearBoss)
         {
             currentDelay += Time.deltaTime;
             if (currentDelay >= Delay)
@@ -78,7 +78,7 @@ public class BossPatterns : MonoBehaviour
 
         if (enumerator == null && Boss_HP >= 0.3f)
         { //현재 enumerator 안에 돌고 있는 코루틴이 없으면
-            Pattern_Num = Random.Range(0, 4);
+            Pattern_Num = Random.Range(0, 3);
             if (Previous_Num == Pattern_Num)
             {
                 Debug.Log("이전 패턴과 똑같음. 재실행");
@@ -94,11 +94,6 @@ public class BossPatterns : MonoBehaviour
                     break;
                 case 2:
                     enumerator = StartCoroutine(BoomBulletPattern());
-                    break;
-                case 3:
-                    if (Boss_HP >= 300.0f)
-                        return;
-                    enumerator = StartCoroutine(BodySlamPattern());
                     break;
             }
             Previous_Num = Pattern_Num;
@@ -159,19 +154,18 @@ public class BossPatterns : MonoBehaviour
         float angle = 0.0f;
         int recycle = 0;
         bool isMoveLeft = false;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
 
         while (true)
         {
             GameObject WaveBullet = Instantiate(Bullet, transform.position, Quaternion.identity);
-            Rigidbody2D Wave_Rigid = WaveBullet.GetComponent<Rigidbody2D>();
             float x = Mathf.Cos((angle+angleAim) + (startAngle * Mathf.PI / 180.0f));
             float y = Mathf.Sin((angle+angleAim) + (startAngle * Mathf.PI / 180.0f));
             //angle += 0.3f;
             Vector3 dir = new Vector3(x, y, 0);
             
             dir.Normalize();
-            Wave_Rigid.AddForce(dir * bullet_Speed, ForceMode2D.Impulse);
+            WaveBullet.GetComponent<Movement2D>().MoveTo(dir*bullet_Speed);
             if (isMoveLeft)
             {
                 angle -= 0.3f;
@@ -214,7 +208,7 @@ public class BossPatterns : MonoBehaviour
         int burst = 0;
         bool isTargeting = false;
         Vector3 target = targetPos.position;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         while (true)
         {
             if (!isTargeting)
@@ -224,8 +218,7 @@ public class BossPatterns : MonoBehaviour
             }
             Vector3 dir = target - transform.position;
             GameObject bullet = Instantiate(Bullet,transform.position,Quaternion.identity);
-            Rigidbody2D rigid_2d = bullet.GetComponent<Rigidbody2D>();
-            rigid_2d.AddForce(dir * 2.0f, ForceMode2D.Impulse);
+            bullet.GetComponent<Movement2D>().MoveTo(dir.normalized * bullet_Speed);
 
             yield return new WaitForSeconds(0.1f);
             burstCount++;
@@ -258,9 +251,9 @@ public class BossPatterns : MonoBehaviour
         float moveTime = 0.28f;
         int BoomCount = 0;
         float boomAngle = 360.0f / 8.0f;
+        float angleRot = 0.0f;
         //float circleAngle = 0.0f;
         GameObject[] shotBullets = new GameObject[8];
-        Rigidbody2D[] shotBullets_rigid = new Rigidbody2D[8];
         yield return new WaitForSeconds(0.5f);
         while (true)
         {
@@ -286,21 +279,17 @@ public class BossPatterns : MonoBehaviour
             for (int i = 0; i < 8; i++)
             {
                 shotBullets[i] = Instantiate(Bullet, BoomPos, Quaternion.identity);
-                float x = Mathf.Cos(i * boomAngle * Mathf.PI / 180.0f);
-                float y = Mathf.Sin(i * boomAngle * Mathf.PI / 180.0f);
+                float x = Mathf.Cos(angleRot + i * boomAngle * Mathf.PI / 180.0f);
+                float y = Mathf.Sin(angleRot + i * boomAngle * Mathf.PI / 180.0f);
                 boomVec[i] = new Vector3(x, y, 0);
-                shotBullets_rigid[i] = shotBullets[i].GetComponent<Rigidbody2D>();
+                shotBullets[i].GetComponent<Movement2D>().MoveTo(boomVec[i].normalized);
             }
 
-            for (int k = 0; k < shotBullets.Length; k++)
-            {
-                shotBullets_rigid[k].AddForce(boomVec[k]*4.0f, ForceMode2D.Impulse);
-                yield return null;
-            }
 
 
             yield return new WaitForSeconds(0.4f);
             BoomCount++;
+            angleRot += 0.3f;
             Debug.Log(BoomCount);
             if(BoomCount == 4)
             {
@@ -343,19 +332,6 @@ public class BossPatterns : MonoBehaviour
 
             yield return new WaitForSeconds(attackRate);
         }
-    }
-    IEnumerator BodySlamPattern()
-    {
-        
-
-        yield return new WaitForSeconds(1.0f);
-
-
-        Debug.Log("몸통박치기 패턴입니다.");
-        yield return new WaitForSeconds(3.0f);
-
-        Debug.Log("몸통박치기 종료");
-        ExitPattern = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
