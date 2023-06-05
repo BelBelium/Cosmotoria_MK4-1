@@ -89,6 +89,7 @@ public class QuestManager : MonoBehaviour
                 {
                     introObject[1].SetActive(false);
                     questObject[3].SetActive(true);
+
                 }
                 break;
             case 40:
