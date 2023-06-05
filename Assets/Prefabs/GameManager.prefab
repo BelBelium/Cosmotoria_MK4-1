@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSurvive: 0
   isPlayerStart: 0
-  Stage: 33
+  Stage: 0
   isAppearBoss: 0
