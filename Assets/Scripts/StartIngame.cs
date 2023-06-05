@@ -35,10 +35,8 @@ public class StartIngame : MonoBehaviour
 
     public void onClick()
     {
-<<<<<<< HEAD
         Loading.LoadScene("InGameScene");
         GameManager.Instance.Stage = 22;
-=======
         switch (stageNumber)
         {
             case "a":
@@ -58,6 +56,5 @@ public class StartIngame : MonoBehaviour
                 break;
         }         
         
->>>>>>> 088e61c00cc8075136fb018c305d17eac244d901
     }
 }
