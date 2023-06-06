@@ -1,4 +1,3 @@
-using KDH.IngameWork.EnemySpawn;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +21,7 @@ public class N2_Enemy_Controller : MonoBehaviour
 
     void Start()
     {
+        EnemyHitEffect = gameObject.GetComponent<EnemyHitEffect>();
         count = GameObject.Find("EnemySpawner").GetComponent<N2_Enemy_Spawner>();
         targetPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         movePos = new Vector3(Random.Range(moveData.LimitMin.x, moveData.LimitMax.x), Random.Range(moveData.LimitMin.y, moveData.LimitMax.y));

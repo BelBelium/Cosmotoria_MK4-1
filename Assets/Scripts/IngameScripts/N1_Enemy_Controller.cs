@@ -17,7 +17,9 @@ public class N1_Enemy_Controller : MonoBehaviour
     void Start()
     {
         E_audio = gameObject.GetComponent<AudioSource>();
+        EnemyHitEffect = gameObject.GetComponent<EnemyHitEffect>();
     }
+
 
     // Update is called once per frame
     void Update()

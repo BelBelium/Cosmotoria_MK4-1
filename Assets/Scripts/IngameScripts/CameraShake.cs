@@ -24,6 +24,11 @@ namespace KDH.IngameWork.CameraShake
                 time += Time.deltaTime;
                 transform.localPosition = originalPosition + Random.insideUnitSphere * intensity;
                 yield return null;
+
+                if (time >= duration)
+                {
+                    transform.localPosition = originalPosition;
+                }
             }
         }
     }

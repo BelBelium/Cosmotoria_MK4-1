@@ -94,7 +94,14 @@ MonoBehaviour:
   - {fileID: 3076488821441855667}
   BossMode2: {fileID: 741030517521734825, guid: b17947c6fe202594ca620fee0a4a54ea, type: 3}
   DangerousEffect: {fileID: 0}
-  Boss_HP: 700
+  bossIsClear: 0
+  Des_Effect:
+  - {fileID: 4009214019341845173, guid: 68c63049d4cc1624482b66926741c507, type: 3}
+  - {fileID: 88841184716895964, guid: 158db0239f78c3540ba718f43fb4e2d9, type: 3}
+  - {fileID: 4137589886870215404, guid: 2394b4ee61276cf438c3a0a628a49ce3, type: 3}
+  - {fileID: 7346070874912373012, guid: 58f6240c1ddde3f4b9dfaceb486f7d5c, type: 3}
+  - {fileID: 3311848308556172853, guid: e19840e52bac5014880ba6eeb62c6f01, type: 3}
+  Boss_HP: 100
 --- !u!58 &7640453305616016666
 CircleCollider2D:
   m_ObjectHideFlags: 0

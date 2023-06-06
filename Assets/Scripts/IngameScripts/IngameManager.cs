@@ -106,5 +106,10 @@ namespace KDH.IngameWork.IngameManager
         {
             Loading.LoadScene("Planteria_TopDown");
         }
+
+        public void BossClear()
+        {
+            clearUI.SetActive(true);
+        }
     }
 }

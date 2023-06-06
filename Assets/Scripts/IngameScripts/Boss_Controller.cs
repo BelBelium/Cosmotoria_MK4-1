@@ -14,6 +14,7 @@ public class Boss_Controller : MonoBehaviour
     private float currentDelay;
     private float appearDelay = 3.0f;
     private Vector3 targetPos;
+    private bool moveComplete;
 
     void Awake()
     {
@@ -32,10 +33,12 @@ public class Boss_Controller : MonoBehaviour
             if (currentDelay >= appearDelay)
             {
                 Boss.transform.position = Vector3.SmoothDamp(Boss.transform.position, targetPos, ref velVec, 0.5f);
-                if (Vector3.Distance(Boss.transform.position, targetPos) <= 0.1f)
+                if (Vector3.Distance(Boss.transform.position, targetPos) <= 0.1f && !moveComplete)
                 {
+                    moveComplete = true;
                     KDH.IngameWork.IngameManager.IngameManager.Instance.isAppearBoss = true;
                     BossHP_Slider.gameObject.SetActive(true);
+                    
                 }
             }
         }

@@ -1,3 +1,4 @@
+using KDH.IngameWork.IngameManager;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -17,6 +18,7 @@ public class BossPatterns : MonoBehaviour
     public GameObject BossMode2;
     public GameObject DangerousEffect;
     public bool bossIsClear;
+    public GameObject[] Des_Effect = new GameObject[5];
     #endregion
 
     #region Private Fields
@@ -27,11 +29,14 @@ public class BossPatterns : MonoBehaviour
     private int Previous_Num;
     private Coroutine enumerator;
     private Coroutine bossMode2_Cor;
+    private Coroutine bossMode3_Cor;
     private float Delay = 2.0f;
     private float currentDelay;
     private bool bossMode2 = false;
     private bool berserk = false;
     private PlayerController playerController;
+    private float intensity = 0.6f;
+    private float duration = 0.5f;
     #endregion
 
     public float boss_HP => Boss_HP;
@@ -52,6 +57,7 @@ public class BossPatterns : MonoBehaviour
             if (currentDelay >= Delay)
             {
                 BossPattern();
+                Debug.Log("Ω««‡¡ﬂ");
             }
         }
 
@@ -67,13 +73,32 @@ public class BossPatterns : MonoBehaviour
             StopCoroutine(bossMode2_Cor);
             bossMode2_Cor = null;
             bossMode2_Cor = StartCoroutine(SummonMinion());
-            StartCoroutine(ShockWavePattern());
+            bossMode3_Cor = StartCoroutine(ShockWavePattern());
         }
 
         if(Boss_HP<= 0 && !bossIsClear)
         {
             bossIsClear = true;
-            StartCoroutine(BossDestroyAction());
+
+            StopCoroutine(bossMode3_Cor);
+            StopCoroutine(enumerator);
+            enumerator = null;
+            bossMode3_Cor = null;
+            KDH.IngameWork.IngameManager.IngameManager.Instance.isAppearBoss = false;
+            StartCoroutine(BossDestroyAction(intensity, duration));
+
+            GameObject[] B_obj = GameObject.FindGameObjectsWithTag("Enemy_Bullet");
+            GameObject[] M_obj = GameObject.FindGameObjectsWithTag("Minion");
+            foreach (GameObject des in B_obj)
+            {
+                Destroy(des);
+            }
+            foreach (GameObject des in M_obj)
+            {
+                Destroy(des);
+            }
+
+            KDH.IngameWork.IngameManager.IngameManager.Instance.BossClear();
         }
     }
 
@@ -347,9 +372,31 @@ public class BossPatterns : MonoBehaviour
         }
     }
 
-    IEnumerator BossDestroyAction()
+    IEnumerator BossDestroyAction(float intensity, float duration)
     {
-        yield return null;
+        Vector2 originalPosition = transform.localPosition;
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            transform.localPosition = originalPosition + Random.insideUnitCircle * intensity;
+            yield return null;
+
+            if(time >= duration)
+            {
+                yield return new WaitForSeconds(0.1f);
+                time = 0;
+                DestroyEffect();
+            }
+        }
+    }
+
+    public void DestroyEffect()
+    {
+        Vector2 spawnEffectPos = new Vector2(Random.Range(gameObject.transform.position.x - 1.5f, gameObject.transform.position.x + 1.5f), Random.Range(gameObject.transform.position.y - 1.5f, gameObject.transform.position.y + 1.5f));
+        GameObject Des_Ins = Instantiate(Des_Effect[Random.Range(0,5)], spawnEffectPos, Quaternion.identity);
+        //Des_Ins.GetComponent<AudioSource>().Play();
+        Destroy(Des_Ins, 0.5f);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
