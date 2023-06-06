@@ -94,7 +94,7 @@ MonoBehaviour:
   - {fileID: 3076488821441855667}
   BossMode2: {fileID: 741030517521734825, guid: b17947c6fe202594ca620fee0a4a54ea, type: 3}
   DangerousEffect: {fileID: 0}
-  Boss_HP: 800
+  Boss_HP: 700
 --- !u!58 &7640453305616016666
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 2.3
 --- !u!1 &2348841391730251152
 GameObject:
   m_ObjectHideFlags: 0

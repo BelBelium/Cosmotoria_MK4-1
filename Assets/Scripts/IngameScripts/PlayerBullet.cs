@@ -8,6 +8,12 @@ public class PlayerBullet : MonoBehaviour
     public int Power_Gage;
     private float ShootDelay;
     public float MaxDelay;
+    public AudioSource Player_audio;
+
+    void Awake()
+    {
+        Player_audio = gameObject.GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -18,7 +24,7 @@ public class PlayerBullet : MonoBehaviour
         if (ShootDelay < MaxDelay)
             return;
 
-        //Player_audio.Play();
+        Player_audio.Play();
         if (Power == 1)
         {
             var Bullet = ObjectPooling.instance.GetBullet();

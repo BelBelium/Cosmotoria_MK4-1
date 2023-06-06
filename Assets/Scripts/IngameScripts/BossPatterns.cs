@@ -16,11 +16,13 @@ public class BossPatterns : MonoBehaviour
     public Transform[] minions_pos;
     public GameObject BossMode2;
     public GameObject DangerousEffect;
+    public bool bossIsClear;
     #endregion
 
     #region Private Fields
     [SerializeField]
     private float Boss_HP = 1000.0f;
+    private float HP_origin;
     private int Pattern_Num = -1;
     private int Previous_Num;
     private Coroutine enumerator;
@@ -29,9 +31,11 @@ public class BossPatterns : MonoBehaviour
     private float currentDelay;
     private bool bossMode2 = false;
     private bool berserk = false;
-    private float HP_origin;
     private PlayerController playerController;
     #endregion
+
+    public float boss_HP => Boss_HP;
+    public float hp_origin => HP_origin;
 
     void Start()
     {
@@ -51,7 +55,7 @@ public class BossPatterns : MonoBehaviour
             }
         }
 
-        if(Boss_HP <= (HP_origin * 0.5f) && !bossMode2)
+        if(Boss_HP <= (HP_origin * 0.6f) && !bossMode2)
         {
             bossMode2 = true;
             bossMode2_Cor = StartCoroutine(SummonMinion());
@@ -60,7 +64,16 @@ public class BossPatterns : MonoBehaviour
         if(Boss_HP <= (HP_origin * 0.3f) && !berserk)
         {
             berserk = true;
+            StopCoroutine(bossMode2_Cor);
+            bossMode2_Cor = null;
+            bossMode2_Cor = StartCoroutine(SummonMinion());
             StartCoroutine(ShockWavePattern());
+        }
+
+        if(Boss_HP<= 0 && !bossIsClear)
+        {
+            bossIsClear = true;
+            StartCoroutine(BossDestroyAction());
         }
     }
 
@@ -76,7 +89,7 @@ public class BossPatterns : MonoBehaviour
         }
 
 
-        if (enumerator == null && Boss_HP >= 0.3f)
+        if (enumerator == null)
         { //현재 enumerator 안에 돌고 있는 코루틴이 없으면
             Pattern_Num = Random.Range(0, 3);
             if (Previous_Num == Pattern_Num)
@@ -332,6 +345,11 @@ public class BossPatterns : MonoBehaviour
 
             yield return new WaitForSeconds(attackRate);
         }
+    }
+
+    IEnumerator BossDestroyAction()
+    {
+        yield return null;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

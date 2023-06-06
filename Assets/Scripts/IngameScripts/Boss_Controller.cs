@@ -7,6 +7,7 @@ public class Boss_Controller : MonoBehaviour
 {
     public GameObject BossPrefab;
     public Transform BossPos;
+    public GameObject BossHP_Slider;
 
     private GameObject Boss;
     private Vector3 velVec = Vector3.zero;
@@ -34,6 +35,7 @@ public class Boss_Controller : MonoBehaviour
                 if (Vector3.Distance(Boss.transform.position, targetPos) <= 0.1f)
                 {
                     KDH.IngameWork.IngameManager.IngameManager.Instance.isAppearBoss = true;
+                    BossHP_Slider.gameObject.SetActive(true);
                 }
             }
         }

@@ -45,7 +45,7 @@ namespace KDH.IngameWork.IngameManager
 
             if (SceneManager.GetActiveScene().name == "InGameScene" || SceneManager.GetActiveScene().name == "InGameScene_2")
             {
-                if (timer.GetComponent<Image>().fillAmount == 0 && !isClear)
+                if (timer.GetComponent<Image>().fillAmount == 0 && !isClear && isPlayerSurvive == true)
                 {
                     isClear = true;
 

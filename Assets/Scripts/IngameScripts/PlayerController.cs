@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     #region Private Fields
     private SpriteRenderer spriteRenderer;
     private bool isCoolTime;
-    private AudioSource Player_audio;
     private bool Btn_Pointer;
     private PlayerBullet playerBullet;
     #endregion
@@ -48,7 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         KDH.IngameWork.IngameManager.IngameManager.Instance.isPlayerSurvive = true;
-        Player_audio = gameObject.GetComponent<AudioSource>();
+        //Player_audio = gameObject.GetComponent<AudioSource>();
         playerBullet = gameObject.GetComponent<PlayerBullet>();
     }
 
