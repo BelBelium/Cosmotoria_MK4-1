@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 8
+  stage: {fileID: 11400000, guid: f0bc8e6d757540548b7d0908cc713661, type: 2}
   direction: {x: 0, y: 0, z: 0}
 --- !u!58 &6018886057051716892
 CircleCollider2D:

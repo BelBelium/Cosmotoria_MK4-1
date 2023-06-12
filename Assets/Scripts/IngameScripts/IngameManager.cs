@@ -93,7 +93,18 @@ namespace KDH.IngameWork.IngameManager
 
             if(fadeImage.time > 2.0f)
             {
-                Loading.LoadScene("Planteria_TopDown");
+                if(SceneManager.GetActiveScene().name == "InGameScene")
+                {
+                    Loading.LoadScene("Planteria_TopDown");
+                }
+                else if(SceneManager.GetActiveScene().name == "InGameScene_2")
+                {
+                    Loading.LoadScene("Planteria_TopDown");
+                }
+                else
+                {
+                    Loading.LoadScene("Planteria_TopDown");
+                }
             }
         }
 
@@ -102,10 +113,6 @@ namespace KDH.IngameWork.IngameManager
             Loading.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        public void ReturnMain()
-        {
-            Loading.LoadScene("Planteria_TopDown");
-        }
 
         public void BossClear()
         {

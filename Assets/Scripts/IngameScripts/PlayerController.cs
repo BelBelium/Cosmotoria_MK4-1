@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] Player_AC;
     public VariableJoystick joystick;
     public Health_UI health;
+    public GameObject Ultimit_UI;
     #endregion
 
     #region Serialize Fields
@@ -117,6 +118,7 @@ public class PlayerController : MonoBehaviour
             if (isCoolTime == false)
             {
                 Boom -= 1;
+                Ultimit_UI.gameObject.SetActive(true);
                 health.Use_Boom();
                 AudioSource.PlayClipAtPoint(Player_AC[1], transform.position);
                 isUlti = true;
