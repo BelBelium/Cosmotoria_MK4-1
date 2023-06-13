@@ -159,3 +159,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 5613476943797854245, guid: 5bf166172aa78234b816da558abda8b2, type: 3}
   Minion_HP: 10
+  Des_Effect: {fileID: 1381919822695581489, guid: 5586adf6795b7f04db07bff9dfa82522, type: 3}
+  I_Power: {fileID: 8854670392159587608, guid: 41a9674b0e401104aaaa70f2251abfe7, type: 3}
