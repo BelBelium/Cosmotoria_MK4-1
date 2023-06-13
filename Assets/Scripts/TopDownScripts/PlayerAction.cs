@@ -16,7 +16,6 @@ public class PlayerAction : MonoBehaviour
     Rigidbody2D rigidBody;
     Animator animator;
     GameObject scanObject;
-    StartIngame startIngame;
     public GameObject teleportName;
 
     Vector3 dirVec;
@@ -42,7 +41,6 @@ public class PlayerAction : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        startIngame = GameObject.Find("Portal").GetComponent<StartIngame>();
     }
 
     
@@ -174,10 +172,7 @@ public class PlayerAction : MonoBehaviour
                 manager.SubMenuActive();
                 break;
             case "TELEPORT":
-                if (isTouch == true)
-                    startIngame.onClick();
-                else 
-                    teleport.MoveSpawn();
+                teleport.MoveSpawn();
                 
                 break;
         }

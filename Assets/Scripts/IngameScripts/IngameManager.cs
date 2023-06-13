@@ -32,7 +32,6 @@ namespace KDH.IngameWork.IngameManager
                 isPlayerSurvive = false;
             }
 
-
         }
 
         void Update()

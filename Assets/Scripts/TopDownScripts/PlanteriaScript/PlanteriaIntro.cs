@@ -15,6 +15,7 @@ public class PlanteriaIntro : MonoBehaviour
     GameObject[] target;
 
     public InGameManager manager;
+    public InGameManager1 manager1;
 
     public string autoTalk;
 
@@ -41,6 +42,14 @@ public class PlanteriaIntro : MonoBehaviour
                 if (collision.CompareTag("Player"))
                 {
                     manager.Scan(target[1]);
+                    Debug.Log("¥Í¿Ω");
+                }
+                break;
+
+            case "three":
+                if (collision.CompareTag("Player"))
+                {
+                    manager1.Scan(target[2]);
                     Debug.Log("¥Í¿Ω");
                 }
                 break;

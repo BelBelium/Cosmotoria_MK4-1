@@ -31,7 +31,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(200, new string[] { "[선인장 방목]", "아무 이유 없이 좌, 우로 흔드는 중." });
         talkData.Add(300, new string[] { "눈치 채셨을 수도 있지만 성이 대칭이 아닙니다." });
         talkData.Add(400, new string[] { "이미 누가 상자를 열고 안의 내용물을 가져가고 없다.", "남은 것이 있나 살펴보지만 역시나 없다." });
-        talkData.Add(500, new string[] { "." });
+        talkData.Add(500, new string[] { "용도를 잘 모르겠는 의자이다.", "별로 앉아보고 싶지 않다." });      
         talkData.Add(1000, new string[] { "안녕....:3", "쿨쿨...:4" });
         talkData.Add(2000, new string[] { "(자고있다...):2", "쿨쿨...:4" });
         talkData.Add(3000, new string[] { "어라? 아직도 안가셨나요?:3", "아하하...! 좀만 있다가 가려고:1", "안돼죠!! 왕녀님이 기다리신다구요!:7",
@@ -97,7 +97,7 @@ public class TalkManager : MonoBehaviour
         "도움이 못 돼서 미안하구려:3", "아니에요! 괜찮아요!:0", "그런데 혹시... 실례가 안된다면:0",
         "저랑 같이 이 음식을 찾는 것을 도와주실 수 있나요?:0", "좋소, 마침 심심하던 참이니:3", "(엄청 흔쾌한 성격이다?!):1",
         "가... 감사합니다! 그럼 지금부터 같이 찾으러 가봐요!:0", "쿨쿨...:4", "(그새 자고있어??!!):2", "일어나세욧!!:0",
-        "어... 엇!:5", "알겠소...:3"});
+        "어... 엇!:5", "알겠소...:3", "아래에 있는 포탈을 타고 가보도록 하지...!:3"});
     }
 
     public string GetTalk(int id, int talkIndex)
