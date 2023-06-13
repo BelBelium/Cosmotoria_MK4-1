@@ -94,15 +94,15 @@ namespace KDH.IngameWork.IngameManager
             {
                 if(SceneManager.GetActiveScene().name == "InGameScene")
                 {
-                    Loading.LoadScene("Planteria_TopDown");
+                    Loading.LoadScene("Planteria_TopDown 1");
                 }
                 else if(SceneManager.GetActiveScene().name == "InGameScene_2")
                 {
-                    Loading.LoadScene("Planteria_TopDown");
+                    Loading.LoadScene("InGameScene_Boss");
                 }
                 else
                 {
-                    Loading.LoadScene("Planteria_TopDown");
+                    Loading.LoadScene("Credit");
                 }
             }
         }
