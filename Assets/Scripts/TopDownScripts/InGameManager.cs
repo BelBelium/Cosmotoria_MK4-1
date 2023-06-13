@@ -107,36 +107,6 @@ public class InGameManager : MonoBehaviour
         talkIndex++;
     }
 
-    //public void GameSave()
-    //{
-    //    PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
-    //    PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
-    //    PlayerPrefs.SetInt("QuestId", questManager.questId);
-    //    PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
-    //    PlayerPrefs.Save();
-
-    //    menuPanel.SetActive(false);
-    //}
-
-    //public void GameLoad()
-    //{
-    //    // 최초 게임 실행했을 땐 데이터가 없으니 예외처리 로직
-    //    if (!PlayerPrefs.HasKey("PlayerX"))
-    //    {
-    //        return;
-    //    }
-
-    //    float x = PlayerPrefs.GetFloat("PlayerX");
-    //    float y = PlayerPrefs.GetFloat("PlayerY");
-    //    int questId = PlayerPrefs.GetInt("QuestId");
-    //    int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
-
-    //    player.transform.position = new Vector3(x, y, 0);
-    //    questManager.questId = questId;
-    //    questManager.questActionIndex = questActionIndex;
-    //    questManager.ControlObject();
-    //}
-
     public void GameExit()
     {
         Application.Quit();
